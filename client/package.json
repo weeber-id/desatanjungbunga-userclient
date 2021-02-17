@@ -10,11 +10,14 @@
     "lint": "eslint --ext js,jsx,ts,tsx --fix"
   },
   "dependencies": {
+    "@svgr/webpack": "^5.5.0",
+    "@types/classnames": "^2.2.11",
     "@types/numeral": "^2.0.0",
     "autoprefixer": "^10.0.4",
     "classnames": "^2.2.6",
     "dayjs": "^1.10.4",
     "next": "latest",
+    "next-images": "^1.7.0",
     "numeral": "^2.0.6",
     "postcss": "^8.1.10",
     "react": "^17.0.1",

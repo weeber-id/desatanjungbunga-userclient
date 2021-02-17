@@ -1,0 +1,17 @@
+.breadcrumb-item::after {
+  content: '';
+  background: url('../../../assets/icons/ic-arrow-breadcrumb.svg');
+  width: 1rem;
+  height: 1rem;
+  background-size: 1rem;
+  margin: 0 0.5rem;
+}
+
+.active.breadcrumb-item::after {
+  content: unset;
+}
+
+.active.breadcrumb-item {
+  @apply text-grey;
+  @apply font-normal;
+}
