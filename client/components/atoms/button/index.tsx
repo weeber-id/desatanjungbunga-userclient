@@ -5,6 +5,7 @@ interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   variant?: 'outlined' | 'default';
   color?: 'red' | 'default';
   fullWidth?: boolean;
+  bold?: boolean;
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -13,13 +14,14 @@ const Button: React.FC<ButtonProps> = ({
   className = '',
   color = 'default',
   fullWidth,
+  bold,
   ...otherProps
 }) => {
   return (
     <button
       {...otherProps}
       className={classNames(
-        'btn text-center flex items-center justify-center px-6 rounded-md text-caption-1 font-semibold focus:outline-none',
+        'btn text-center flex items-center justify-center px-6 rounded-md text-caption-1 focus:outline-none',
         {
           [className]: className.length > 0,
           'text-white': variant === 'default',
@@ -30,6 +32,7 @@ const Button: React.FC<ButtonProps> = ({
           'text-purple-light border-purple-light': color === 'default' && variant === 'outlined',
           'w-full': fullWidth,
           [styles['btn']]: true,
+          ['font-medium']: bold,
         }
       )}
     >

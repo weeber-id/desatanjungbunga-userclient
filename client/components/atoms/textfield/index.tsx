@@ -14,7 +14,7 @@ interface TextFieldProps extends React.InputHTMLAttributes<HTMLInputElement> {
 const TextField: React.FC<TextFieldProps> = ({
   className = '',
   inputClassName = '',
-  variant,
+  variant = 'default',
   type = 'text',
   fullWidth,
   labelText,
@@ -32,7 +32,7 @@ const TextField: React.FC<TextFieldProps> = ({
       })}
     >
       {variant === 'search' ? (
-        <IconSearch className="absolute transform top-1/2 left-4 -translate-y-2/4" />
+        <IconSearch className="absolute transform top-1/2 left-2 -translate-y-2/4" />
       ) : null}
       {labelText ? (
         <label className="block text-caption-1 font-bold text-purple-light mb-1.5">
@@ -43,15 +43,13 @@ const TextField: React.FC<TextFieldProps> = ({
         {...otherProps}
         style={{ height: variant === 'search' ? '40px' : '32px' }}
         type={type}
-        className={classNames(
-          'border border-purple-light focus:outline-none text-footnote px-4 rounded-md',
-          {
-            'text-caption-1 rounded-full pl-11': variant === 'search',
-            [inputClassName]: inputClassName?.length > 0,
-            'w-full': fullWidth || width,
-            'border-red-error': isError,
-          }
-        )}
+        className={classNames('border-purple-light focus:outline-none px-4', {
+          'border-b text-body pl-11': variant === 'search',
+          [inputClassName]: inputClassName?.length > 0,
+          'w-full': fullWidth || width,
+          'border-red-error': isError,
+          'border text-body-sm rounded-md': variant === 'default',
+        })}
       />
       {isError && <span className="text-caption-1 text-red mt-3 block">{errorMessage}</span>}
     </div>
