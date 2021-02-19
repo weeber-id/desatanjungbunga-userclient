@@ -11,7 +11,7 @@ const Header = () => {
     const listenToScroll = () => {
       const st = window.pageYOffset || document.documentElement.scrollTop;
 
-      if (st > 0) {
+      if (st > 100) {
         setScroll(true);
       } else {
         setScroll(false);
