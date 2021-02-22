@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import Image from 'next/image';
+import Link from 'next/link';
 
 interface CardImageProps {
   text?: string;
@@ -14,6 +15,7 @@ interface CardImageProps {
   italic?: boolean;
   textSize?: 'body' | 'body-sm' | 'h5';
   hover?: boolean;
+  href?: string;
 }
 
 const CardImage: React.FC<CardImageProps> = ({
@@ -29,8 +31,9 @@ const CardImage: React.FC<CardImageProps> = ({
   italic,
   textSize = 'body',
   hover,
+  href,
 }) => {
-  return (
+  const component = (
     <div
       className={classNames('px-2 py-2.5 border border-purple-light rounded-lg bg-white', {
         [className]: className,
@@ -59,6 +62,15 @@ const CardImage: React.FC<CardImageProps> = ({
       </p>
     </div>
   );
+
+  if (href)
+    return (
+      <Link href={href}>
+        <a>{component}</a>
+      </Link>
+    );
+
+  return component;
 };
 
 export default CardImage;

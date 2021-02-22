@@ -18,8 +18,6 @@ const Pagination: React.FC<PaginationProps> = ({ maxPage = 10 }) => {
       const page = count + 1;
       el.push(
         <button
-          id={(count + 1).toString()}
-          key={`pagination-${count + 1}`}
           onClick={() => setCurrentPage(page)}
           className={classNames('mr-5 focus:outline-none', {
             'text-purple-light underline font-semibold': currentPage === count + 1,
@@ -51,7 +49,6 @@ const Pagination: React.FC<PaginationProps> = ({ maxPage = 10 }) => {
       const page = count + 1;
       el.push(
         <button
-          key={`pagination-${count + 1}`}
           onClick={() => setCurrentPage(page)}
           className={classNames('mr-5 focus:outline-none', {
             'text-purple-light underline font-semibold': currentPage === count + 1,
@@ -72,7 +69,6 @@ const Pagination: React.FC<PaginationProps> = ({ maxPage = 10 }) => {
       const page = count;
       el.unshift(
         <button
-          key={`pagination-${count}`}
           onClick={() => setCurrentPage(page)}
           className={classNames('mr-5 focus:outline-none', {
             'text-purple-light underline font-semibold': currentPage === count,
@@ -105,7 +101,6 @@ const Pagination: React.FC<PaginationProps> = ({ maxPage = 10 }) => {
       const page = count + 1;
       el.push(
         <button
-          key={`pagination-${count + 1}`}
           onClick={() => setCurrentPage(page)}
           className={classNames('mr-5 focus:outline-none', {
             'text-purple-light underline font-semibold': currentPage === count + 1,
@@ -137,7 +132,9 @@ const Pagination: React.FC<PaginationProps> = ({ maxPage = 10 }) => {
           className={classNames('mr-0.5', { [styles['ic-active']]: currentPage > 1 })}
         />
       </button>
-      {element.map((val) => val)}
+      {element.map((val, i) => (
+        <div key={`pagination-${i}`}>{val}</div>
+      ))}
       <button
         disabled={currentPage === maxPage}
         onClick={() => setCurrentPage(currentPage + 1)}
