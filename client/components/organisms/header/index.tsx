@@ -3,9 +3,11 @@ import classNames from 'classnames';
 import { useEffect, useState } from 'react';
 import { IconTanjungBunga } from '../../../assets';
 import { TextField } from '../../atoms';
+import { useRouter } from 'next/router';
 
 const Header = () => {
   const [isScroll, setScroll] = useState<boolean>(false);
+  const { asPath } = useRouter();
 
   useEffect(() => {
     const listenToScroll = () => {
@@ -54,25 +56,47 @@ const Header = () => {
         </div>
         <div className="flex items-center justify-center h-14 text-purple font-medium text-body relative z-10">
           <Link href="/">
-            <a className="hover:text-red mr-8">Home</a>
+            <a className={classNames('hover:text-red mr-8', { 'text-red': asPath === '/' })}>
+              Home
+            </a>
           </Link>
-          <Link href="/">
-            <a className="hover:text-red mr-8">Tentang Desa</a>
+          <Link href="/about">
+            <a className={classNames('hover:text-red mr-8', { 'text-red': asPath === '/about' })}>
+              Tentang Desa
+            </a>
           </Link>
-          <Link href="/">
-            <a className="hover:text-red mr-8">Wisata</a>
+          <Link href="/wisata">
+            <a className={classNames('hover:text-red mr-8', { 'text-red': asPath === '/wisata' })}>
+              Wisata
+            </a>
           </Link>
-          <Link href="/">
-            <a className="hover:text-red mr-8">Penginapan</a>
+          <Link href="/penginapan">
+            <a
+              className={classNames('hover:text-red mr-8', {
+                'text-red': asPath === '/penginapan',
+              })}
+            >
+              Penginapan
+            </a>
           </Link>
-          <Link href="/">
-            <a className="hover:text-red mr-8">Komoditas</a>
+          <Link href="/komoditas">
+            <a
+              className={classNames('hover:text-red mr-8', { 'text-red': asPath === '/komoditas' })}
+            >
+              Komoditas
+            </a>
           </Link>
-          <Link href="/">
-            <a className="hover:text-red mr-8">Kerajinan</a>
+          <Link href="/kerajinan">
+            <a
+              className={classNames('hover:text-red mr-8', { 'text-red': asPath === '/kerajinan' })}
+            >
+              Kerajinan
+            </a>
           </Link>
-          <Link href="/">
-            <a className="hover:text-red">Artikel</a>
+          <Link href="/artikel">
+            <a className={classNames('hover:text-red', { 'text-red': asPath === '/artikel' })}>
+              Artikel
+            </a>
           </Link>
         </div>
       </nav>

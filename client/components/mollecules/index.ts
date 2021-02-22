@@ -1,4 +1,5 @@
 import BreadCrumb from './breadcrumb';
 import CardImage from './card-image';
+import Pagination from './pagination';
 
-export { BreadCrumb, CardImage };
+export { BreadCrumb, CardImage, Pagination };
