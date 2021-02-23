@@ -5,6 +5,7 @@ import IconSearch from './icon-search.svg';
 import IconTanjungBunga from './icon-tanjungbunga.svg';
 import IconArrowRight from './icon-arrow-right.svg';
 import IconArrowLeft from './icon-arrow-left.svg';
+import IconAccordionDropdown from './icon-accordion-dropdown.svg';
 
 export {
   IconFacebook,
@@ -14,4 +15,5 @@ export {
   IconTanjungBunga,
   IconArrowRight,
   IconArrowLeft,
+  IconAccordionDropdown,
 };
