@@ -19,7 +19,7 @@ const Pagination: React.FC<PaginationProps> = ({ maxPage = 10 }) => {
       el.push(
         <button
           onClick={() => setCurrentPage(page)}
-          className={classNames('mr-5 focus:outline-none', {
+          className={classNames('mr-5 focus:outline-none hover:text-red', {
             'text-purple-light underline font-semibold': currentPage === count + 1,
           })}
         >
@@ -32,7 +32,7 @@ const Pagination: React.FC<PaginationProps> = ({ maxPage = 10 }) => {
     el.push(
       <button
         onClick={() => setCurrentPage(maxPage)}
-        className={classNames('mr-5 focus:outline-none', {
+        className={classNames('mr-5 focus:outline-none hover:text-red', {
           'text-purple-light underline font-semibold': currentPage === maxPage,
         })}
       >
@@ -50,7 +50,7 @@ const Pagination: React.FC<PaginationProps> = ({ maxPage = 10 }) => {
       el.push(
         <button
           onClick={() => setCurrentPage(page)}
-          className={classNames('mr-5 focus:outline-none', {
+          className={classNames('mr-5 focus:outline-none hover:text-red', {
             'text-purple-light underline font-semibold': currentPage === count + 1,
           })}
         >
@@ -70,7 +70,7 @@ const Pagination: React.FC<PaginationProps> = ({ maxPage = 10 }) => {
       el.unshift(
         <button
           onClick={() => setCurrentPage(page)}
-          className={classNames('mr-5 focus:outline-none', {
+          className={classNames('mr-5 focus:outline-none hover:text-red', {
             'text-purple-light underline font-semibold': currentPage === count,
           })}
         >
@@ -83,7 +83,7 @@ const Pagination: React.FC<PaginationProps> = ({ maxPage = 10 }) => {
     el.push(
       <button
         onClick={() => setCurrentPage(maxPage)}
-        className={classNames('mr-5 focus:outline-none', {
+        className={classNames('mr-5 focus:outline-none hover:text-red', {
           'text-purple-light underline font-semibold': currentPage === maxPage,
         })}
       >
@@ -102,7 +102,7 @@ const Pagination: React.FC<PaginationProps> = ({ maxPage = 10 }) => {
       el.push(
         <button
           onClick={() => setCurrentPage(page)}
-          className={classNames('mr-5 focus:outline-none', {
+          className={classNames('mr-5 focus:outline-none hover:text-red', {
             'text-purple-light underline font-semibold': currentPage === count + 1,
           })}
         >
@@ -124,7 +124,7 @@ const Pagination: React.FC<PaginationProps> = ({ maxPage = 10 }) => {
           'h-8 w-8 flex items-center justify-center rounded-full focus:outline-none mr-5',
           {
             'bg-blue': currentPage === 1,
-            'bg-purple-light': currentPage > 1,
+            'bg-purple-light hover:bg-red': currentPage > 1,
           }
         )}
       >
@@ -142,7 +142,7 @@ const Pagination: React.FC<PaginationProps> = ({ maxPage = 10 }) => {
           'h-8 w-8 flex items-center justify-center rounded-full focus:outline-none',
           {
             'bg-blue-light': currentPage === maxPage,
-            'bg-purple-light': currentPage < maxPage,
+            'bg-purple-light hover:bg-red': currentPage < maxPage,
           }
         )}
       >

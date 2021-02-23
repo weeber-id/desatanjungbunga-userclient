@@ -29,9 +29,11 @@ const Button: React.FC<ButtonProps> = ({
           'text-white': variant === 'default',
           'bg-transparent border': variant === 'outlined',
           'bg-red': color === 'red' && variant === 'default',
-          'text-red border-red': color === 'red' && variant === 'outlined',
-          'bg-purple-light': color === 'default' && variant === 'default',
-          'text-purple-light border-purple-light': color === 'default' && variant === 'outlined',
+          'text-red border-red hover:text-white hover:bg-red':
+            color === 'red' && variant === 'outlined',
+          'bg-purple-light hover:bg-red': color === 'default' && variant === 'default',
+          'text-purple-light border-purple-light hover:text-white hover:bg-red':
+            color === 'default' && variant === 'outlined',
           'w-full': fullWidth,
           [styles['btn']]: !customHeight,
           ['font-medium']: bold,
