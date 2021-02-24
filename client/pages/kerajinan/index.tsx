@@ -1,6 +1,20 @@
 import { DummyWisata } from '../../assets';
 import { Button, CardImage, Footer, Header, Pagination, TextField } from '../../components';
 
+// export const getStaticProps: GetStaticProps = async () => {
+//   const res = await fetch(urlApi + '/handcrafts');
+
+//   const data = await res.json();
+
+//   if (!data) return { redirect: { destination: '/', permanent: false } };
+
+//   return {
+//     props: {
+//       data,
+//     },
+//   };
+// };
+
 const KerajinanPage = () => {
   return (
     <>
@@ -13,7 +27,7 @@ const KerajinanPage = () => {
           <Button customHeight className="mr-11 h-8">
             Filter
           </Button>
-          <TextField />
+          <TextField variant="search-right" />
         </div>
       </section>
       <section className="container mx-auto mb-16 px-10">

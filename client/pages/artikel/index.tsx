@@ -1,12 +1,12 @@
 import { DummyWisata } from '../../assets';
 import { Button, CardImage, Footer, Header, Pagination, TextField } from '../../components';
 
-const PenginapanPage = () => {
+const ArtikelPage = () => {
   return (
     <>
       <Header />
       <section className="container mx-auto px-10">
-        <h2 className="text-center font-medium text-h2 mt-48 mb-7">Penginapan</h2>
+        <h2 className="text-center font-medium text-h2 mt-48 mb-7">Artikel</h2>
       </section>
       <section className="container mx-auto mb-16 px-10">
         <div className="flex items-center">
@@ -28,7 +28,6 @@ const PenginapanPage = () => {
             layout="responsive"
             text="Visit Tanjung Bunga"
             hover
-            href="/penginapan/test"
           />
           <CardImage
             src={DummyWisata}
@@ -66,4 +65,4 @@ const PenginapanPage = () => {
   );
 };
 
-export default PenginapanPage;
+export default ArtikelPage;

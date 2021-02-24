@@ -13,7 +13,7 @@ const WisataPage = () => {
           <Button customHeight className="mr-11 h-8">
             Filter
           </Button>
-          <TextField />
+          <TextField variant="search-right" />
         </div>
       </section>
       <section className="container mx-auto mb-16 px-10">

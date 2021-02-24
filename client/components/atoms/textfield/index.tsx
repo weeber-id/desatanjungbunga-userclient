@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import { IconSearch } from '../../../assets';
 
 interface TextFieldProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  variant?: 'search' | 'default';
+  variant?: 'search' | 'default' | 'search-right';
   inputClassName?: string;
   fullWidth?: boolean;
   width?: string | number;
@@ -29,6 +29,7 @@ const TextField: React.FC<TextFieldProps> = ({
       className={classNames('relative', {
         [className]: className.length > 0,
         'w-full': fullWidth,
+        'border border-purple-light rounded-md overflow-hidden': variant === 'search-right',
       })}
     >
       {variant === 'search' ? (
@@ -39,19 +40,27 @@ const TextField: React.FC<TextFieldProps> = ({
           {labelText} <span className="text-red">{errorMessage && '*'}</span>
         </label>
       ) : null}
-      <input
-        {...otherProps}
-        style={{ height: variant === 'search' ? '40px' : '32px' }}
-        type={type}
-        className={classNames('focus:outline-none px-3', {
-          'border-b text-body pl-11': variant === 'search',
-          [inputClassName]: inputClassName?.length > 0,
-          'w-full': fullWidth || width,
-          'border-red': isError,
-          'border-purple-light': !isError,
-          'border text-body-sm rounded-md': variant === 'default',
-        })}
-      />
+      <div className="flex items-center">
+        <input
+          {...otherProps}
+          style={{ height: variant === 'search' ? '40px' : '32px' }}
+          type={type}
+          className={classNames('focus:outline-none px-3', {
+            'border-b text-body pl-11': variant === 'search',
+            [inputClassName]: inputClassName?.length > 0,
+            'w-full': fullWidth || width,
+            'border-red': isError,
+            'border-purple-light': !isError,
+            'border text-body-sm rounded-md': variant === 'default',
+            'border-0': variant === 'search-right',
+          })}
+        />
+        {variant === 'search-right' && (
+          <button className="focus:outline-none border-l border-purple-light">
+            <IconSearch className="mx-2" viewBox="0 0 32 32" height="24" width="24" />
+          </button>
+        )}
+      </div>
       {isError && <span className="text-body-sm text-red mt-1 block">{errorMessage}</span>}
     </div>
   );
