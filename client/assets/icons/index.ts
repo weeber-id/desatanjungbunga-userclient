@@ -7,6 +7,7 @@ import IconArrowRight from './icon-arrow-right.svg';
 import IconArrowLeft from './icon-arrow-left.svg';
 import IconAccordionDropdown from './icon-accordion-dropdown.svg';
 import IconClose from './icon-close.svg';
+import IconAirPanas from './icon-air-panas.svg';
 
 export {
   IconFacebook,
@@ -18,4 +19,5 @@ export {
   IconArrowLeft,
   IconAccordionDropdown,
   IconClose,
+  IconAirPanas,
 };

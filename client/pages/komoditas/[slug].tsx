@@ -54,7 +54,6 @@ const KomoditasDetailPage = () => {
           </div>
         </div>
       </section>
-      <RekomendasiTerdekat />
       <Footer />
     </>
   );

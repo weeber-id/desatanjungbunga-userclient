@@ -6,7 +6,7 @@ const PenginapanPage = () => {
     <>
       <Header />
       <section className="container mx-auto px-10">
-        <h2 className="text-center font-medium text-h2 mt-48 mb-7">Wisata</h2>
+        <h2 className="text-center font-medium text-h2 mt-48 mb-7">Penginapan</h2>
       </section>
       <section className="container mx-auto mb-16 px-10">
         <div className="flex items-center">
