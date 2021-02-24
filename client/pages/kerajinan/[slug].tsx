@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { DummyMasakan } from '../../assets';
 import { BreadCrumb, BreadCrumbItem, Button, Footer, Header, InfoDetail } from '../../components';
 
-const KomoditasDetailPage = () => {
+const KerajinanDetailPage = () => {
   const { query } = useRouter();
 
   const { slug } = query;
@@ -14,7 +14,7 @@ const KomoditasDetailPage = () => {
       <section style={{ paddingTop: 38 * 4 }} className="bg-blue-light mb-16">
         <div className="container mx-auto px-10 flex justify-end pb-4">
           <BreadCrumb>
-            <BreadCrumbItem href="/komoditas">Komoditas</BreadCrumbItem>
+            <BreadCrumbItem href="/kerajinan">Kerajinan</BreadCrumbItem>
             <BreadCrumbItem isActive>{slug}</BreadCrumbItem>
           </BreadCrumb>
         </div>
@@ -27,11 +27,13 @@ const KomoditasDetailPage = () => {
             </div>
           </div>
           <div>
-            <h3 className="text-h3 font-medium text-black mb-3">Gule Onta</h3>
+            <h3 className="text-h3 font-medium text-black mb-3">Topi Benjang</h3>
             <p className="text-body text-purple-light mb-3 font-bold">Harga mulai:</p>
-            <h4 className="text-h4 text-black font-medium mb-1">Rp 10,000 ~ 18,000/porsi</h4>
+            <h4 className="text-h4 text-black font-medium mb-1">Rp 10,000</h4>
             <p className="text-body text-black mb-8">Buka Senin - Jumat (08.00 - 17.00)</p>
-            <p className="text-body text-purple-light mb-3 font-bold">Sekilas Tentang Masakan A</p>
+            <p className="text-body text-purple-light mb-3 font-bold">
+              Sekilas Tentang Topi Benjang :
+            </p>
             <p className="text-body text-black mb-6">
               Phasellus varius volutpat tellus ac sollicitudin. Suspendisse tempor ligula vitae
               tempor egestas. Nulla pharetra felis, A pretium vulputate. Nunc gravida lectus sapien.
@@ -51,4 +53,4 @@ const KomoditasDetailPage = () => {
   );
 };
 
-export default KomoditasDetailPage;
+export default KerajinanDetailPage;
