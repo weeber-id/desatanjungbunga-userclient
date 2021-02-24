@@ -19,7 +19,7 @@ const RekomendasiTerdekat = () => {
         <button
           onClick={() => setActive('penginapan')}
           className={classNames(
-            'w-48 h-9 focus:outline-none',
+            'w-48 h-9 focus:outline-none hover:text-red',
             active === 'penginapan' ? 'text-red' : 'text-purple-light'
           )}
         >
@@ -28,7 +28,7 @@ const RekomendasiTerdekat = () => {
         <button
           onClick={() => setActive('kuliner')}
           className={classNames(
-            'w-48 h-9 focus:outline-none',
+            'w-48 h-9 focus:outline-none hover:text-red',
             active === 'kuliner' ? 'text-red' : 'text-purple-light'
           )}
         >

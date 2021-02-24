@@ -29,7 +29,7 @@ const Header = () => {
 
   return (
     <header>
-      <nav className="shadow-lg fixed top-0 left-0 w-full z-50 bg-white">
+      <nav className="shadow-lg fixed top-0 left-0 w-full z-40 bg-white">
         <div
           className={classNames(
             'flex transition-all duration-500 items-center justify-between px-10 container mx-auto',

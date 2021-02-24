@@ -35,23 +35,24 @@ const TextField: React.FC<TextFieldProps> = ({
         <IconSearch className="absolute transform top-1/2 left-2 -translate-y-2/4" />
       ) : null}
       {labelText ? (
-        <label className="block text-caption-1 font-bold text-purple-light mb-1.5">
-          {labelText}
+        <label className="block text-body-sm font-bold text-black mb-1.5">
+          {labelText} <span className="text-red">{errorMessage && '*'}</span>
         </label>
       ) : null}
       <input
         {...otherProps}
         style={{ height: variant === 'search' ? '40px' : '32px' }}
         type={type}
-        className={classNames('border-purple-light focus:outline-none px-4', {
+        className={classNames('focus:outline-none px-3', {
           'border-b text-body pl-11': variant === 'search',
           [inputClassName]: inputClassName?.length > 0,
           'w-full': fullWidth || width,
-          'border-red-error': isError,
+          'border-red': isError,
+          'border-purple-light': !isError,
           'border text-body-sm rounded-md': variant === 'default',
         })}
       />
-      {isError && <span className="text-caption-1 text-red mt-3 block">{errorMessage}</span>}
+      {isError && <span className="text-body-sm text-red mt-1 block">{errorMessage}</span>}
     </div>
   );
 };

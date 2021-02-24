@@ -3,9 +3,12 @@ import { useRef, useState } from 'react';
 import { CardJawab } from '..';
 import { IconAccordionDropdown } from '../../../assets';
 import { promiseTimeOut } from '../../../helpers/promiseTimeout';
+import { TanyaJawab } from '../../organisms';
+import style from './card-tanya.module.css';
 
 const CardTanya = () => {
   const [status, setStatus] = useState<'show' | 'collapsing' | 'hidden'>('hidden');
+  const [tanyaJawab, setTanyaJawab] = useState<boolean>(false);
 
   const divRef = useRef<HTMLDivElement>();
 
@@ -23,6 +26,8 @@ const CardTanya = () => {
 
   return (
     <>
+      {tanyaJawab && <TanyaJawab onCancel={() => setTanyaJawab(false)} />}
+
       <div className="rounded-lg shadow-lg px-6 border-l-4 border-red py-3">
         <div className="flex items-center justify-between mb-4">
           <div className="text-body font-bold text-red">Jane Doe</div>
@@ -33,17 +38,22 @@ const CardTanya = () => {
           obcaecati iste voluptas nisi, ipsam nam, rerum accusamus impedit! Voluptatibus provident
           officia sunt aliquid recusandae atque incidunt?
         </p>
-        <button className="text-body-sm text-purple-light underline focus:outline-none">
+        <button className="text-body-sm text-purple-light underline focus:outline-none hover:text-red">
           Jawab
         </button>
       </div>
       <button
         onClick={handleCollapse}
-        className="flex justify-end items-center w-full mt-2 focus:outline-none"
+        className={classNames(
+          'flex group justify-end items-center w-full mt-2 focus:outline-none',
+          style['icon-accordion']
+        )}
       >
-        <span className="text-body-sm text-purple-light mr-2">Tampilkan Jawaban (4)</span>
+        <span className="text-body-sm text-purple-light mr-2 group-hover:text-red">
+          Tampilkan Jawaban (4)
+        </span>
         <IconAccordionDropdown
-          className={classNames('transform transition-all', {
+          className={classNames('transform transition-all icon-accordion', {
             'rotate-0': status === 'hidden',
             'rotate-180': status === 'show' || status === 'collapsing',
           })}

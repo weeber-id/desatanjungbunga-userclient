@@ -35,10 +35,10 @@ const WisataDetailPage = () => {
           </div>
           <div>
             <h3 className="text-h3 font-medium text-black mb-3">Pendakian Pusuk Bukit</h3>
-            <p className="text-body text-purple-light mb-3">Harga Masuk:</p>
+            <p className="text-body text-purple-light mb-3 font-bold">Harga Masuk:</p>
             <h4 className="text-h4 text-black font-medium mb-1">Rp 15.000</h4>
             <p className="text-body text-black mb-8">Buka Senin - Jumat (08.00 - 17.00)</p>
-            <p className="text-body text-purple-light mb-3">
+            <p className="text-body text-purple-light mb-3 font-bold">
               Sekilas Tentang Pendakian Pusuk Bukit
             </p>
             <p className="text-body text-black mb-16">

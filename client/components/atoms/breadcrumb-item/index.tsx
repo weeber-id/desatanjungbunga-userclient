@@ -18,11 +18,14 @@ const BreadcrumbItem: React.FC<BreadcrumbItemProps> = ({
 
   return (
     <div
-      className={classNames('breadcrumb-item text-purple font-extrabold flex items-center', {
-        [className]: className?.length > 0,
-        [styles['breadcrumb-item']]: true,
-        [styles['active']]: isActive,
-      })}
+      className={classNames(
+        'breadcrumb-item text-purple font-extrabold flex items-center hover:text-red',
+        {
+          [className]: className?.length > 0,
+          [styles['breadcrumb-item']]: true,
+          [styles['active']]: isActive,
+        }
+      )}
     >
       <Link href={isActive ? pathname : href}>
         <a
