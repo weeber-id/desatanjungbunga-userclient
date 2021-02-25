@@ -23,7 +23,7 @@ const Button: React.FC<ButtonProps> = ({
     <button
       {...otherProps}
       className={classNames(
-        'btn text-center flex items-center justify-center px-6 rounded-md text-caption-1 focus:outline-none',
+        'btn text-center flex items-center justify-center px-6 rounded-md text-body-sm lg:text-body focus:outline-none',
         {
           [className]: className.length > 0,
           'text-white': variant === 'default',

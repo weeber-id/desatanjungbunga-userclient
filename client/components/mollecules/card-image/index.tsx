@@ -51,12 +51,15 @@ const CardImage: React.FC<CardImageProps> = ({
         objectPosition="center"
       />
       <p
-        className={classNames(`text-${textSize} line-clamp-3 mt-2.5 px-3 text-${textColor}`, {
-          'text-center': textPosition === 'center',
-          'text-left': textPosition === 'start',
-          'text-right': textPosition === 'end',
-          italic: italic,
-        })}
+        className={classNames(
+          `text-body-sm lg:text-${textSize} line-clamp-3 mt-2.5 px-3 text-${textColor}`,
+          {
+            'text-center': textPosition === 'center',
+            'text-left': textPosition === 'start',
+            'text-right': textPosition === 'end',
+            italic: italic,
+          }
+        )}
       >
         {text}
       </p>
