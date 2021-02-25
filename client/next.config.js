@@ -9,7 +9,20 @@ module.exports = withPlugins([[withImages, { fileExtensions: ['jpg', 'jpeg', 'pn
       issuer: {
         test: /\.(js|ts)x?$/,
       },
-      use: ['@svgr/webpack'],
+      use: [
+        {
+          loader: '@svgr/webpack',
+          options: {
+            svgoConfig: {
+              plugins: [
+                {
+                  removeViewBox: false,
+                },
+              ],
+            },
+          },
+        },
+      ],
     });
 
     return config;
