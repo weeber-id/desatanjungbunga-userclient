@@ -44,9 +44,8 @@ const TextField: React.FC<TextFieldProps> = ({
           {...otherProps}
           style={{ height: variant === 'search' ? '40px' : '32px' }}
           type={type}
-          className={classNames('focus:outline-none px-3', {
+          className={classNames('focus:outline-none px-3', inputClassName, {
             'border-b text-body pl-11': variant === 'search',
-            [inputClassName]: inputClassName?.length > 0,
             'w-full': fullWidth || width,
             'border-red': isError,
             'border-purple-light': !isError,
