@@ -14,8 +14,8 @@ const InfoDetail = () => {
       <AnimatePresence>
         {tanyaJawab && <TanyaJawab onCancel={() => setTanyaJawab(false)} />}
       </AnimatePresence>
-      <div className="px-5 py-4 border border-purple-light rounded-md">
-        <div className="flex items-center border-b border-black relative mb-6">
+      <div className="md:px-5 p-2 md:py-4  border border-purple-light rounded-md">
+        <div className="flex items-center text-body-sm md:text-body border-b border-black relative mb-6">
           <div
             className={classNames(
               'absolute transition-all transform duration-300 -bottom-0.5 left-0 h-1 w-32 bg-red rounded-full',
@@ -43,7 +43,7 @@ const InfoDetail = () => {
         </div>
         <div className="mb-16 px-4">
           {active === 'detail' ? (
-            <p className="text-body">
+            <p className="text-body-sm md:text-body">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi excepturi ex itaque
               quidem! Numquam, provident sequi. Obcaecati tenetur maxime fugiat quidem, iste sunt,
               alias assumenda molestias sint sed nisi ex. <br /> <br />

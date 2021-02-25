@@ -18,6 +18,7 @@ module.exports = {
       h5: ['1.40625rem', '1.875rem'],
       body: ['1.125rem', '1.625rem'],
       'body-sm': ['0.9rem', '1.375rem'],
+      'body-xs': ['0.72rem', '1.0875rem'],
     },
     colors: {
       transparent: 'transparent',

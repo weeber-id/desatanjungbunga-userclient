@@ -30,10 +30,10 @@ const CardTanya = () => {
 
       <div className="rounded-lg shadow-lg px-6 border-l-4 border-red py-3">
         <div className="flex items-center justify-between mb-4">
-          <div className="text-body font-bold text-red">Jane Doe</div>
-          <span className="text-body-sm text-grey">1d</span>
+          <div className="text-body-sm md:text-body font-bold text-red">Jane Doe</div>
+          <span className="md:text-body-sm text-body-xs text-grey">1d</span>
         </div>
-        <p className="body-sm text-black mb-4">
+        <p className="md:text-body-sm text-body-xs text-black mb-4">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore, magni alias saepe vero
           obcaecati iste voluptas nisi, ipsam nam, rerum accusamus impedit! Voluptatibus provident
           officia sunt aliquid recusandae atque incidunt?
