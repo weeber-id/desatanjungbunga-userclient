@@ -32,7 +32,8 @@ const TanyaJawab: React.FC<TanyaJawabProps> = ({ onCancel }) => {
       animate={{ opacity: 1 }}
       initial={{ opacity: 0 }}
       exit={{ opacity: 0 }}
-      className="fixed flex justify-center items-center top-0 left-0 w-full h-full overflow-auto bg-black z-50 bg-opacity-10"
+      style={{ zIndex: 120 }}
+      className="fixed flex justify-center items-center top-0 left-0 w-full h-full overflow-auto bg-black bg-opacity-10"
     >
       <motion.div
         initial="hidden"

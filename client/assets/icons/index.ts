@@ -9,6 +9,7 @@ import IconAccordionDropdown from './icon-accordion-dropdown.svg';
 import IconClose from './icon-close.svg';
 import IconAirPanas from './icon-air-panas.svg';
 import IconWhatsapp from './icon-whatsapp.svg';
+import IconHamburger from './icon-hamburger.svg';
 
 export {
   IconFacebook,
@@ -22,4 +23,5 @@ export {
   IconClose,
   IconAirPanas,
   IconWhatsapp,
+  IconHamburger,
 };
