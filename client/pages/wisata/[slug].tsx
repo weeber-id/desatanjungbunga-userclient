@@ -19,14 +19,14 @@ const WisataDetailPage = () => {
     <>
       <Header />
       <section style={{ paddingTop: 38 * 4 }} className="bg-blue-light mb-16">
-        <div className="container mx-auto px-10 flex justify-end pb-4">
+        <div className="container mx-auto px-6 md:px-10 flex justify-end pb-4">
           <BreadCrumb>
             <BreadCrumbItem href="/wisata">Wisata</BreadCrumbItem>
             <BreadCrumbItem isActive>{slug}</BreadCrumbItem>
           </BreadCrumb>
         </div>
       </section>
-      <section className="container mx-auto px-6 lg:px-10 mb-16">
+      <section className="container mx-auto px-6 md:px-10 mb-16">
         <div className="grid grid-cols-1 gap-y-4 md:grid-cols-2 gap-x-16">
           <div>
             <div className="sticky top-24">

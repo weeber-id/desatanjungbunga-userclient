@@ -20,7 +20,7 @@ const FasilitasIcon: React.FC<FasilitasIconProps> = ({ Icon, text, src }) => {
           alt={`icon ${text}`}
         />
       )}
-      <span className="text-black font-medium">{text}</span>
+      <span className="text-black lg:text-body text-body-sm font-medium">{text}</span>
     </div>
   );
 };
