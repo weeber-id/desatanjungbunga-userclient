@@ -30,19 +30,19 @@ const AboutPage = () => {
       if (st + 56 === navRef.current?.offsetTop) setSticky(true);
       else setSticky(false);
 
-      if (st + 122 > sejarahRef.current.offsetTop && st + 122 < sambutanRef.current.offsetTop)
+      if (st + 122 > sejarahRef.current?.offsetTop && st + 122 < sambutanRef.current?.offsetTop)
         setActive(0);
       else if (
-        st + 122 > sambutanRef.current.offsetTop &&
-        st + 122 < dosenPenelitiRef.current.offsetTop
+        st + 122 > sambutanRef.current?.offsetTop &&
+        st + 122 < dosenPenelitiRef.current?.offsetTop
       )
         setActive(1);
       else if (
-        st + 122 > dosenPenelitiRef.current.offsetTop &&
-        st + 122 < tujuanWebsiteRef.current.offsetTop
+        st + 122 > dosenPenelitiRef.current?.offsetTop &&
+        st + 122 < tujuanWebsiteRef.current?.offsetTop
       )
         setActive(2);
-      else if (st + 122 > tujuanWebsiteRef.current.offsetTop) setActive(3);
+      else if (st + 122 > tujuanWebsiteRef.current?.offsetTop) setActive(3);
     };
 
     window.addEventListener('scroll', listenToScroll);
@@ -55,27 +55,32 @@ const AboutPage = () => {
   return (
     <>
       <Header />
-      <h3 className="text-center text-h3 text-black mt-48 font-medium mb-11">
+      <h3 className="text-center md:text-h3 text-h5 text-black mt-48 font-medium mb-11">
         Profil Desa Tanjung Bunga
       </h3>
       <nav
         ref={navRef}
-        className={classNames('sticky transition-all duration-300 z-50 top-14 bg-white mb-12', {
-          'shadow-lg': sticky,
-        })}
+        className={classNames(
+          'sticky overflow-auto md:hidden-scrollbar transition-all duration-300 z-50 top-14 bg-white mb-12',
+          {
+            'shadow-lg': sticky,
+          }
+        )}
       >
-        <div
-          className={classNames('container mx-auto relative border-black', { 'border-b': !sticky })}
-        >
+        <div className={classNames('container flex mx-auto relative ', {})}>
           <div
-            style={{ width: 185, left: active * 185 }}
-            className="absolute duration-500 transition-all -bottom-0.5 rounded-full left-0 h-1 bg-red"
+            style={{ height: !sticky ? 0.5 : 0, bottom: 2 }}
+            className="z-40 absolute left-0 w-full bg-black"
+          ></div>
+          <div
+            style={{ minWidth: 185, maxWidth: 185, left: active * 185 }}
+            className="absolute duration-500 z-50 transition-all bottom-0 rounded-full left-0 h-1 bg-red"
           ></div>
           <button
             onClick={(e) => handleScrollTo(e, sejarahRef)}
-            style={{ width: 185 }}
+            style={{ minWidth: 185, maxWidth: 185 }}
             className={classNames(
-              'text-body h-9 hover:text-red focus:outline-none',
+              'md:text-body text-body-sm h-9 whitespace-nowrap hover:text-red focus:outline-none',
               active === 0 ? 'text-red' : 'text-purple'
             )}
             value="0"
@@ -84,9 +89,9 @@ const AboutPage = () => {
           </button>
           <button
             onClick={(e) => handleScrollTo(e, sambutanRef)}
-            style={{ width: 185 }}
+            style={{ minWidth: 185, maxWidth: 185 }}
             className={classNames(
-              'text-body h-9 hover:text-red focus:outline-none',
+              'md:text-body text-body-sm h-9 whitespace-nowrap hover:text-red focus:outline-none',
               active === 1 ? 'text-red' : 'text-purple'
             )}
             value="1"
@@ -95,9 +100,9 @@ const AboutPage = () => {
           </button>
           <button
             onClick={(e) => handleScrollTo(e, dosenPenelitiRef)}
-            style={{ width: 185 }}
+            style={{ minWidth: 185, maxWidth: 185 }}
             className={classNames(
-              'text-body h-9 hover:text-red focus:outline-none',
+              'md:text-body text-body-sm h-9 whitespace-nowrap hover:text-red focus:outline-none',
               active === 2 ? 'text-red' : 'text-purple'
             )}
             value="2"
@@ -106,9 +111,9 @@ const AboutPage = () => {
           </button>
           <button
             onClick={(e) => handleScrollTo(e, tujuanWebsiteRef)}
-            style={{ width: 185 }}
+            style={{ minWidth: 185, maxWidth: 185 }}
             className={classNames(
-              'text-body h-9 hover:text-red focus:outline-none',
+              'md:text-body text-body-sm h-9 whitespace-nowrap hover:text-red focus:outline-none',
               active === 3 ? 'text-red' : 'text-purple'
             )}
             value="3"
@@ -118,8 +123,8 @@ const AboutPage = () => {
           <Link href="/contact">
             <a>
               <button
-                style={{ width: 185 }}
-                className="text-body text-purple h-9 hover:text-red focus:outline-none"
+                style={{ minWidth: 185, maxWidth: 185 }}
+                className="md:text-body text-body-sm whitespace-nowrap text-purple h-9 hover:text-red focus:outline-none"
               >
                 Hubungi Kami
               </button>
@@ -127,19 +132,22 @@ const AboutPage = () => {
           </Link>
         </div>
       </nav>
+
       <section
         ref={sejarahRef}
-        className="container mx-auto px-10 mb-10 border-b-2 border-purple pb-20"
+        className="container mx-auto px-6 md:px-10 mb-10 border-b-2 border-purple pb-20"
       >
-        <h4 className="text-h4 text-purple font-medium mb-16 text-center">Sejarah</h4>
+        <h4 className="md:text-h4 text-h5 md:text-purple text-black font-medium mb-4 md:mb-16 text-center">
+          Sejarah
+        </h4>
         <div className="max-w-xl">
           <img
-            className="float-left mr-4"
+            className="float-left mr-4 mb-4"
             src="/assets/images/home-2.png"
             alt="Desa Tanjung Bunga"
           />
         </div>
-        <p className="text-body text-black">
+        <p className="md:text-body text-body-sm text-black">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris lacinia odio at sagittis
           iaculis. Nullam tortor nibh, vestibulum at aliquam in, volutpat ac erat. Sed dapibus eros
           at nisi pretium, non gravida odio porta. Lorem ipsum dolor sit amet, consectetur
@@ -170,17 +178,23 @@ const AboutPage = () => {
       </section>
       <section
         ref={sambutanRef}
-        className="container mx-auto px-10 pb-20 mb-10 border-b-2 border-purple"
+        className="container mx-auto px-6 md:px-10 pb-20 mb-10 border-b-2 border-purple"
       >
-        <h4 className="text-h4 text-purple font-medium mb-10 text-center">Sambutan</h4>
-        <div className="grid grid-cols-5 w-3/4 mx-auto gap-6">
-          <div className="col-span-2">
+        <h4 className="md:text-h4 text-h5 text-black md:text-purple font-medium mb-10 text-center">
+          Sambutan
+        </h4>
+        <div className="grid grid-cols-1 md:grid-cols-5 md:w-3/4 mx-auto gap-6">
+          <div className="md:col-span-2 w-3/4 md:w-full mx-auto">
             <Image layout="responsive" src={DummyOrang} height={1200} width={900} />
           </div>
-          <div className="col-span-3">
-            <h5 className="text-h5 font-medium text-black mb-2">Dr. Suparman</h5>
-            <h6 className="text-body text-purple mb-6">Ketua Desa Tanjung Bunga</h6>
-            <p className="text-black text-body">
+          <div className="md:col-span-3">
+            <h5 className="md:text-h5 text-body text-center md:text-left font-medium text-black mb-2">
+              Dr. Suparman
+            </h5>
+            <h6 className="md:text-body text-body-sm md:text-left text-center md:text-purple text-red mb-6">
+              Ketua Desa Tanjung Bunga
+            </h6>
+            <p className="text-black md:text-body text-body-sm">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris lacinia odio at
               sagittis iaculis. Nullam tortor nibh, vestibulum at aliquam in, volutpat ac erat. Sed
               dapibus eros at nisi pretium, non gravida odio porta. Lorem ipsum dolor sit amet,
@@ -196,10 +210,12 @@ const AboutPage = () => {
       </section>
       <section
         ref={dosenPenelitiRef}
-        className="container mx-auto px-10 pb-20 mb-10 border-b-2 border-purple"
+        className="container mx-auto px-6 md:px-10 pb-20 mb-10 border-b-2 border-purple"
       >
-        <h4 className="text-h4 text-purple font-medium mb-10 text-center">Dosen Peneliti</h4>
-        <div className="grid grid-cols-2 gap-6">
+        <h4 className="md:text-h4 text-h5 md:text-purple text-black font-medium mb-10 text-center">
+          Dosen Peneliti
+        </h4>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {[1, 2, 3, 4, 5, 6].map((val) => (
             <CardDosenPeneliti
               src={DummyOrang}
@@ -219,21 +235,23 @@ const AboutPage = () => {
           ))}
         </div>
       </section>
-      <section ref={tujuanWebsiteRef} className="container mx-auto px-10 pb-20 mb-10">
-        <h4 className="text-h4 text-purple font-medium mb-10 text-center">Tujuan Website</h4>
-        <div className="grid grid-cols-3 justify-items-center gap-6">
-          <div className="border border-purple rounded-lg py-28 px-4 cursor-pointer hover:border-2">
-            <p className="text-h4 text-purple font-medium text-center">
+      <section ref={tujuanWebsiteRef} className="container mx-auto px-6 md:px-10 pb-20 mb-10">
+        <h4 className="md:text-h4 text-h5 md:text-purple text-black font-medium mb-10 text-center">
+          Tujuan Website
+        </h4>
+        <div className="grid grid-cols-1 lg:grid-cols-3 justify-items-center gap-6">
+          <div className="border border-purple w-full rounded-lg py-12 md:py-28 px-4 cursor-pointer hover:border-2">
+            <p className="md:text-h4 text-body text-black lg:text-purple font-medium text-center">
               Meningkatkan Minat Wisatawan ke Desa Tanjung Desa
             </p>
           </div>
-          <div className="border border-purple rounded-lg py-28 px-4 cursor-pointer hover:border-2">
-            <p className="text-h4 text-purple font-medium text-center">
+          <div className="border border-purple w-full rounded-lg py-12 md:py-28 px-4 cursor-pointer hover:border-2">
+            <p className="md:text-h4 text-body text-black lg:text-purple font-medium text-center">
               Memberikan Informasi yang Mumpuni kepada Publik
             </p>
           </div>
-          <div className="border border-purple rounded-lg py-28 px-4 cursor-pointer hover:border-2">
-            <p className="text-h4 text-purple font-medium text-center">
+          <div className="border border-purple w-full rounded-lg py-12 md:py-28 px-4 cursor-pointer hover:border-2">
+            <p className="md:text-h4 text-body text-black lg:text-purple font-medium text-center">
               Mensejahterakan Warga Desa Tanjung Bunga dalam Menunjang Bisnis Wisatanya
             </p>
           </div>
