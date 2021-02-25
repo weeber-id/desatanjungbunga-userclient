@@ -26,8 +26,7 @@ const TextField: React.FC<TextFieldProps> = ({
   return (
     <div
       style={{ width }}
-      className={classNames('relative', {
-        [className]: className.length > 0,
+      className={classNames('relative', className, {
         'w-full': fullWidth,
         'border border-purple-light rounded-md overflow-hidden': variant === 'search-right',
       })}
