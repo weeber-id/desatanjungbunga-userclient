@@ -4,5 +4,14 @@ import Pagination from './pagination';
 import CardTanya from './card-tanya';
 import CardJawab from './card-jawab';
 import FasilitasIcon from './fasilitas-icon';
+import CardDosenPeneliti from './card-dosen-peneliti';
 
-export { BreadCrumb, CardImage, Pagination, CardTanya, CardJawab, FasilitasIcon };
+export {
+  BreadCrumb,
+  CardImage,
+  Pagination,
+  CardTanya,
+  CardJawab,
+  FasilitasIcon,
+  CardDosenPeneliti,
+};
