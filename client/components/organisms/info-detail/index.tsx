@@ -6,7 +6,7 @@ import { Button } from '../../atoms';
 import { CardTanya } from '../../mollecules';
 
 interface Props {
-  description: string;
+  description?: string;
 }
 
 const InfoDetail: React.FC<Props> = ({ description }) => {

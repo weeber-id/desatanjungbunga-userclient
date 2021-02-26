@@ -43,6 +43,10 @@ export type Commodity = BaseElement & {
     end: string;
     unit: string;
   };
+  links: {
+    name: string;
+    link: string;
+  }[];
 };
 
 export type HandCraft = BaseElement;
