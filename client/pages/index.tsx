@@ -29,7 +29,7 @@ export default function Home() {
               </Button>
             </div>
           </div>
-          <div className="relative row-start-1 transform scale-75">
+          <div className="relative row-start-1 lg:row-start-auto transform scale-75">
             <div className="w-24 h-8 bg-purple-light opacity-40 transform rotate-12 absolute right-0 -top-8 z-10"></div>
             <div className="w-24 h-8 bg-purple-light opacity-40 transform rotate-12 absolute left-0 -bottom-8 z-10"></div>
             <CardImage
