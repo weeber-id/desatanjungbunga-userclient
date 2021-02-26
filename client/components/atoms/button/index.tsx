@@ -12,8 +12,8 @@ interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   href?: string;
   isExternal?: boolean;
 }
-
-const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+// eslint-disable-next-line
+const Button = forwardRef<any, ButtonProps>(
   (
     {
       children,
@@ -49,7 +49,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 
     if (isExternal) {
       return (
-        <a className={willBeUsedClassName} href={href}>
+        <a ref={ref} className={willBeUsedClassName} href={href}>
           {children}
         </a>
       );
@@ -58,7 +58,9 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     if (href) {
       return (
         <Link href={href}>
-          <a className={willBeUsedClassName}>{children}</a>
+          <a ref={ref} className={willBeUsedClassName}>
+            {children}
+          </a>
         </Link>
       );
     }
