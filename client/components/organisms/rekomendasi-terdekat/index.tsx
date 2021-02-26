@@ -39,7 +39,7 @@ const RekomendasiTerdekat = () => {
       </div>
       <div
         style={{ gridTemplateColumns: 'repeat(4, minmax(300px, 1fr))', scrollPadding: '0 24px' }}
-        className="lg:grid lg:gap-x-6 overflow-auto scroll-snap-x-container lg:hidden-scrollbar flex flex-nowrap"
+        className="lg:grid lg:gap-x-6 overflow-x-auto overflow-y-hidden scroll-snap-x-container lg:hidden-scrollbar flex flex-nowrap"
       >
         <div className="lg:hidden">
           <div className="w-6"></div>

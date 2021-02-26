@@ -5,7 +5,11 @@ import { TanyaJawab } from '..';
 import { Button } from '../../atoms';
 import { CardTanya } from '../../mollecules';
 
-const InfoDetail = () => {
+interface Props {
+  description: string;
+}
+
+const InfoDetail: React.FC<Props> = ({ description }) => {
   const [active, setActive] = useState<'detail' | 'tanya jawab'>('detail');
   const [tanyaJawab, setTanyaJawab] = useState<boolean>(false);
 
@@ -43,14 +47,7 @@ const InfoDetail = () => {
         </div>
         <div className="mb-16 px-4">
           {active === 'detail' ? (
-            <p className="text-body-sm md:text-body">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi excepturi ex itaque
-              quidem! Numquam, provident sequi. Obcaecati tenetur maxime fugiat quidem, iste sunt,
-              alias assumenda molestias sint sed nisi ex. <br /> <br />
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi excepturi ex itaque
-              quidem! Numquam, provident sequi. Obcaecati tenetur maxime fugiat quidem, iste sunt,
-              alias assumenda molestias sint sed nisi ex.
-            </p>
+            <p className="text-body-sm md:text-body">{description}</p>
           ) : (
             <>
               <Button onClick={() => setTanyaJawab(true)} className="mb-6">

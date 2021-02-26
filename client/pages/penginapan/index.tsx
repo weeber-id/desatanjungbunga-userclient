@@ -1,7 +1,30 @@
-import { DummyWisata } from '../../assets';
+import { GetStaticProps, InferGetStaticPropsType } from 'next';
+import { ApiResponse, Lodging } from '../../@types';
 import { Button, CardImage, Footer, Header, Pagination, TextField } from '../../components';
+import { urlApi } from '../../helpers/urlApi';
 
-const PenginapanPage = () => {
+type Lodgings = ApiResponse<Lodging[] | null>;
+
+interface StaticProps {
+  initialData: Lodgings;
+}
+
+export const getStaticProps: GetStaticProps<StaticProps> = async () => {
+  const res = await fetch(urlApi + '/lodgings');
+
+  const initialData: Lodgings = await res.json();
+
+  return {
+    props: {
+      initialData,
+    },
+    revalidate: 1,
+  };
+};
+
+const PenginapanPage: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = ({
+  initialData,
+}) => {
   return (
     <>
       <Header />
@@ -21,39 +44,17 @@ const PenginapanPage = () => {
           style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))' }}
           className="grid gap-x-12 gap-y-10"
         >
-          <CardImage
-            src={DummyWisata}
-            width={1200}
-            height={900}
-            layout="responsive"
-            text="Visit Tanjung Bunga"
-            hover
-            href="/penginapan/test"
-          />
-          <CardImage
-            src={DummyWisata}
-            width={1200}
-            height={900}
-            layout="responsive"
-            text="Visit Tanjung Bunga"
-            hover
-          />
-          <CardImage
-            src={DummyWisata}
-            width={1200}
-            height={900}
-            layout="responsive"
-            text="Visit Tanjung Bunga"
-            hover
-          />
-          <CardImage
-            src={DummyWisata}
-            width={1200}
-            height={900}
-            layout="responsive"
-            text="Visit Tanjung Bunga"
-            hover
-          />
+          {initialData.data?.map((lodging) => (
+            <CardImage
+              key={lodging.id}
+              src={lodging.image}
+              width={1200}
+              height={900}
+              layout="responsive"
+              text={lodging.name}
+              hover
+            />
+          ))}
         </div>
       </section>
       <section className="container mx-auto mb-16 px-10">

@@ -1,5 +1,7 @@
+import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next';
 import Image from 'next/image';
-import { useRouter } from 'next/router';
+import numeral from 'numeral';
+import { ApiResponse, Travel } from '../../@types';
 import { DummyWisata } from '../../assets';
 import {
   BreadCrumb,
@@ -9,11 +11,50 @@ import {
   InfoDetail,
   RekomendasiTerdekat,
 } from '../../components';
+import { urlApi } from '../../helpers/urlApi';
 
-const WisataDetailPage = () => {
-  const { query } = useRouter();
+interface StaticProps {
+  initialData: ApiResponse<Travel>;
+}
 
-  const { slug } = query;
+export const getStaticPaths: GetStaticPaths = async () => {
+  return {
+    fallback: true,
+    paths: [
+      {
+        params: { slug: 'asdf' },
+      },
+    ],
+  };
+};
+
+export const getStaticProps: GetStaticProps<StaticProps> = async () => {
+  const res = await fetch(urlApi + '/travel?id=6036f9c39ff38f076a43a73b');
+
+  const initialData: ApiResponse<Travel> = await res.json();
+
+  if (initialData.meta.code === 404) {
+    return {
+      redirect: {
+        destination: '/404',
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {
+      initialData,
+    },
+    revalidate: 1,
+  };
+};
+
+const WisataDetailPage: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = ({
+  initialData,
+}) => {
+  const { data } = initialData;
+  const { from, to } = data.operation_time;
 
   return (
     <>
@@ -22,7 +63,7 @@ const WisataDetailPage = () => {
         <div className="container mx-auto px-6 md:px-10 flex justify-end pb-4">
           <BreadCrumb>
             <BreadCrumbItem href="/wisata">Wisata</BreadCrumbItem>
-            <BreadCrumbItem isActive>{slug}</BreadCrumbItem>
+            <BreadCrumbItem isActive>{data.name}</BreadCrumbItem>
           </BreadCrumb>
         </div>
       </section>
@@ -34,25 +75,23 @@ const WisataDetailPage = () => {
             </div>
           </div>
           <div>
-            <h3 className="md:text-h3 text-h5 font-medium text-black mb-3">
-              Pendakian Pusuk Bukit
-            </h3>
+            <h3 className="md:text-h3 text-h5 font-medium text-black mb-3">{data.name}</h3>
             <p className="text-body-sm md:text-body text-purple-light mb-3 font-bold">
               Harga Masuk:
             </p>
-            <h4 className="md:text-h4 text-h5 text-black font-medium mb-1">Rp 15.000</h4>
+            <h4 className="md:text-h4 text-h5 text-black font-medium mb-1">
+              Rp {numeral(data.price).format('0,0')}
+            </h4>
             <p className="text-body-sm md:text-body text-black mb-8">
-              Buka Senin - Jumat (08.00 - 17.00)
+              Buka {from.day} - {to.day} ({from.time} - {to.time})
             </p>
             <p className="text-body-sm md:text-body text-purple-light mb-3 font-bold">
-              Sekilas Tentang Pendakian Pusuk Bukit
+              Sekilas Tentang {data.name}
             </p>
             <p className="text-body-sm md:text-body text-black mb-11 md:mb-16">
-              Phasellus varius volutpat tellus ac sollicitudin. Suspendisse tempor ligula vitae
-              tempor egestas. Nulla pharetra felis, A pretium vulputate. Nunc gravida lectus sapien.
-              Dui tempor.
+              {data.short_description}
             </p>
-            <InfoDetail />
+            <InfoDetail description={data.description} />
           </div>
         </div>
       </section>

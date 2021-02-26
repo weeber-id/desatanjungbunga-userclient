@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+import Link from 'next/link';
 import styles from './button.module.css';
 
 interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
@@ -7,6 +8,7 @@ interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   fullWidth?: boolean;
   bold?: boolean;
   customHeight?: boolean;
+  href?: string;
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -16,10 +18,11 @@ const Button: React.FC<ButtonProps> = ({
   color = 'default',
   fullWidth,
   bold,
+  href,
   customHeight = false,
   ...otherProps
 }) => {
-  return (
+  const btn = (
     <button
       {...otherProps}
       className={classNames(
@@ -43,6 +46,16 @@ const Button: React.FC<ButtonProps> = ({
       {children}
     </button>
   );
+
+  if (href) {
+    return (
+      <Link href={href}>
+        <a>{btn}</a>
+      </Link>
+    );
+  }
+
+  return btn;
 };
 
 export default Button;

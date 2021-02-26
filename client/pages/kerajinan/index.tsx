@@ -1,21 +1,29 @@
+import { GetStaticProps, InferGetStaticPropsType } from 'next';
+import { ApiResponse, HandCraft } from '../../@types';
 import { DummyWisata } from '../../assets';
 import { Button, CardImage, Footer, Header, Pagination, TextField } from '../../components';
+import { urlApi } from '../../helpers/urlApi';
 
-// export const getStaticProps: GetStaticProps = async () => {
-//   const res = await fetch(urlApi + '/handcrafts');
+type HandCrafts = ApiResponse<HandCraft[] | null>;
 
-//   const data = await res.json();
+interface StaticProps {
+  initialData: HandCrafts;
+}
 
-//   if (!data) return { redirect: { destination: '/', permanent: false } };
+export const getStaticProps: GetStaticProps<StaticProps> = async () => {
+  const res = await fetch(urlApi + '/handcrafts');
 
-//   return {
-//     props: {
-//       data,
-//     },
-//   };
-// };
+  const initialData: HandCrafts = await res.json();
 
-const KerajinanPage = () => {
+  return {
+    props: {
+      initialData,
+    },
+    revalidate: 1,
+  };
+};
+
+const KerajinanPage: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = () => {
   return (
     <>
       <Header />
