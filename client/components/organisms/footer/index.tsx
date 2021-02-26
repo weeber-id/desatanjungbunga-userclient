@@ -21,7 +21,7 @@ const Footer = () => {
           <h3 className="md:text-h3 text-h5 text-purple-light font-medium mb-2.5">
             0626 - 01020304
           </h3>
-          <Button variant="outlined" color="red">
+          <Button href="/contact" variant="outlined" color="red">
             Lihat Lengkap
           </Button>
           <p className="text-body-sm text-purple-light mt-3 md:mt-6 mb-2">Follow us:</p>

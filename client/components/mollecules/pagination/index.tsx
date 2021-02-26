@@ -5,11 +5,18 @@ import styles from './pagination.module.css';
 
 interface PaginationProps {
   maxPage?: number;
+  isDisabled?: boolean;
+  onChange?: (currentPage: number) => void;
 }
 
-const Pagination: React.FC<PaginationProps> = ({ maxPage = 10 }) => {
+const Pagination: React.FC<PaginationProps> = ({ maxPage = 10, isDisabled, onChange }) => {
   const [currentPage, setCurrentPage] = useState<number>(1);
   let element = [];
+
+  const handleChangePage = (page: number) => {
+    if (!isDisabled) setCurrentPage(page);
+    if (onChange) onChange(page);
+  };
 
   if (maxPage >= 4 && currentPage <= maxPage - 4) {
     const el = [];
@@ -18,7 +25,7 @@ const Pagination: React.FC<PaginationProps> = ({ maxPage = 10 }) => {
       const page = count + 1;
       el.push(
         <button
-          onClick={() => setCurrentPage(page)}
+          onClick={() => handleChangePage(page)}
           className={classNames('mr-5 focus:outline-none hover:text-red', {
             'text-purple-light underline font-semibold': currentPage === count + 1,
           })}
@@ -31,7 +38,7 @@ const Pagination: React.FC<PaginationProps> = ({ maxPage = 10 }) => {
     el.push(<div className="mr-5">...</div>);
     el.push(
       <button
-        onClick={() => setCurrentPage(maxPage)}
+        onClick={() => handleChangePage(maxPage)}
         className={classNames('mr-5 focus:outline-none hover:text-red', {
           'text-purple-light underline font-semibold': currentPage === maxPage,
         })}
@@ -49,7 +56,7 @@ const Pagination: React.FC<PaginationProps> = ({ maxPage = 10 }) => {
       const page = count + 1;
       el.push(
         <button
-          onClick={() => setCurrentPage(page)}
+          onClick={() => handleChangePage(page)}
           className={classNames('mr-5 focus:outline-none hover:text-red', {
             'text-purple-light underline font-semibold': currentPage === count + 1,
           })}
@@ -69,7 +76,7 @@ const Pagination: React.FC<PaginationProps> = ({ maxPage = 10 }) => {
       const page = count;
       el.unshift(
         <button
-          onClick={() => setCurrentPage(page)}
+          onClick={() => handleChangePage(page)}
           className={classNames('mr-5 focus:outline-none hover:text-red', {
             'text-purple-light underline font-semibold': currentPage === count,
           })}
@@ -82,7 +89,7 @@ const Pagination: React.FC<PaginationProps> = ({ maxPage = 10 }) => {
     el.push(<div className="mr-5">...</div>);
     el.push(
       <button
-        onClick={() => setCurrentPage(maxPage)}
+        onClick={() => handleChangePage(maxPage)}
         className={classNames('mr-5 focus:outline-none hover:text-red', {
           'text-purple-light underline font-semibold': currentPage === maxPage,
         })}
@@ -101,7 +108,7 @@ const Pagination: React.FC<PaginationProps> = ({ maxPage = 10 }) => {
       const page = count + 1;
       el.push(
         <button
-          onClick={() => setCurrentPage(page)}
+          onClick={() => handleChangePage(page)}
           className={classNames('mr-5 focus:outline-none hover:text-red', {
             'text-purple-light underline font-semibold': currentPage === count + 1,
           })}
@@ -119,7 +126,7 @@ const Pagination: React.FC<PaginationProps> = ({ maxPage = 10 }) => {
     <div className="flex items-center">
       <button
         disabled={currentPage === 1}
-        onClick={() => setCurrentPage(currentPage - 1)}
+        onClick={() => handleChangePage(currentPage - 1)}
         className={classNames(
           'h-8 w-8 flex items-center justify-center rounded-full focus:outline-none mr-5',
           {
@@ -133,11 +140,13 @@ const Pagination: React.FC<PaginationProps> = ({ maxPage = 10 }) => {
         />
       </button>
       {element.map((val, i) => (
-        <div key={`pagination-${i}`}>{val}</div>
+        <div className="select-none" key={`pagination-${i}`}>
+          {val}
+        </div>
       ))}
       <button
         disabled={currentPage === maxPage}
-        onClick={() => setCurrentPage(currentPage + 1)}
+        onClick={() => handleChangePage(currentPage + 1)}
         className={classNames(
           'h-8 w-8 flex items-center justify-center rounded-full focus:outline-none',
           {
