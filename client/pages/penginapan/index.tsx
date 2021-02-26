@@ -1,6 +1,6 @@
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import { ApiResponse, Lodging } from '../../@types';
-import { Button, CardImage, Footer, Header, Pagination, TextField } from '../../components';
+import { CardImage, Filter, Footer, Header, Pagination, TextField } from '../../components';
 import { urlApi } from '../../helpers/urlApi';
 
 type Lodgings = ApiResponse<Lodging[] | null>;
@@ -33,9 +33,7 @@ const PenginapanPage: React.FC<InferGetStaticPropsType<typeof getStaticProps>> =
       </section>
       <section className="container mx-auto mb-16 px-6 lg:px-10">
         <div className="flex items-center">
-          <Button customHeight className="lg:mr-11 mr-3 h-8">
-            Filter
-          </Button>
+          <Filter className="lg:mr-11 mr-3 ">Filter</Filter>
           <TextField inputClassName="w-full" className="w-full lg:w-auto" variant="search-right" />
         </div>
       </section>

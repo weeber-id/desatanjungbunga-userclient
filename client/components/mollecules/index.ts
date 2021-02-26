@@ -5,6 +5,7 @@ import CardTanya from './card-tanya';
 import CardJawab from './card-jawab';
 import FasilitasIcon from './fasilitas-icon';
 import CardDosenPeneliti from './card-dosen-peneliti';
+import Filter from './filter';
 
 export {
   BreadCrumb,
@@ -14,4 +15,5 @@ export {
   CardJawab,
   FasilitasIcon,
   CardDosenPeneliti,
+  Filter,
 };

@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import classNames from 'classnames';
+import Dosen from '../../json/dosen.json';
 import { MutableRefObject, useEffect, useRef, useState } from 'react';
 import { DummyOrang } from '../../assets';
 import { CardDosenPeneliti, Footer, Header } from '../../components';
@@ -216,21 +217,13 @@ const AboutPage = () => {
           Dosen Peneliti
         </h4>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {[1, 2, 3, 4, 5, 6].map((val) => (
+          {Dosen.map((val) => (
             <CardDosenPeneliti
-              src={DummyOrang}
-              name="Mahito Genkai"
-              title="Dosen Universitas Indonesia"
-              description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris lacinia odio at
-            sagittis iaculis. Nullam tortor nibh, vestibulum at aliquam in, volutpat ac erat. Sed
-            dapibus eros at nisi pretium, non gravida odio porta. Lorem ipsum dolor sit amet,
-            consectetur adipiscing elit. Phasellus sit amet eros ipsum. Morbi malesuada auctor
-            velit quis vulputate. Mauris vel eros tincidunt, tincidunt libero vitae, consequat
-            nulla. Etiam porttitor auctor diam, porta congue mi rutrum tristique. Sed nec nisl sed
-            sem dignissim varius. Nunc venenatis, purus vel volutpat laoreet, enim libero pharetra
-            turpis, id eleifend metus quam vel libero. Class aptent taciti sociosqu ad litora
-            torquent per conubia nostra, per inceptos himenaeos."
-              key={val}
+              src={`/assets/images/${val.filename}`}
+              name={val.name}
+              title={val.title}
+              description={val.description}
+              key={val.name}
             />
           ))}
         </div>
