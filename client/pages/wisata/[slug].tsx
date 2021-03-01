@@ -2,7 +2,6 @@ import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next';
 import Image from 'next/image';
 import numeral from 'numeral';
 import { ApiResponse, Travel } from '../../@types';
-import { DummyWisata } from '../../assets';
 import {
   BreadCrumb,
   BreadCrumbItem,
@@ -12,24 +11,33 @@ import {
   RekomendasiTerdekat,
 } from '../../components';
 import { urlApi } from '../../helpers/urlApi';
+import { Travels } from './index';
 
 interface StaticProps {
   initialData: ApiResponse<Travel>;
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
+  const res = await fetch(urlApi + '/travels');
+
+  const data: Travels = await res.json();
+
+  const { id, slug } = data.data.data[0];
+
   return {
     fallback: true,
     paths: [
       {
-        params: { slug: 'asdf' },
+        params: { slug: slug + '@!@' + id },
       },
     ],
   };
 };
 
-export const getStaticProps: GetStaticProps<StaticProps> = async () => {
-  const res = await fetch(urlApi + '/travel?id=6036f9c39ff38f076a43a73b');
+export const getStaticProps: GetStaticProps<StaticProps> = async ({ params }) => {
+  const [slug, id] = params.slug.toString().split('@!@');
+
+  const res = await fetch(urlApi + `/travel?id=${id}&slug=${slug}`);
 
   const initialData: ApiResponse<Travel> = await res.json();
 
@@ -71,7 +79,7 @@ const WisataDetailPage: React.FC<InferGetStaticPropsType<typeof getStaticProps>>
         <div className="grid grid-cols-1 gap-y-4 md:grid-cols-2 gap-x-16">
           <div>
             <div className="sticky top-24">
-              <Image layout="responsive" width={1200} height={900} src={DummyWisata} />
+              <Image layout="responsive" width={1200} height={900} src={data.image} />
             </div>
           </div>
           <div>

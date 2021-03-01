@@ -1,9 +1,48 @@
+import { GetStaticProps, InferGetStaticPropsType } from 'next';
+import classNames from 'classnames';
 import Head from 'next/head';
 import Image from 'next/image';
+import { useState } from 'react';
+import { Travel } from '../@types';
 import { DummyWisata } from '../assets';
 import { Button, CardImage, Footer, Header } from '../components';
+import { urlApi } from '../helpers/urlApi';
+import { Travels } from './wisata';
+import { Commodities } from './komoditas';
+import { HandCrafts } from './kerajinan';
 
-export default function Home() {
+interface StaticProps {
+  travels: Travels;
+  commodities: Commodities;
+  handcrafts: HandCrafts;
+}
+
+export const getStaticProps: GetStaticProps<StaticProps> = async () => {
+  const resTravels = await fetch(urlApi + '/travels?content_per_page=4&page=1');
+  const resCommodities = await fetch(urlApi + '/culinaries?content_per_page=3&page=1');
+  const resHandcrafts = await fetch(urlApi + '/handcrafts?content_per_page=4&page=1');
+
+  const travels: Travels = await resTravels.json();
+  const commodities: Commodities = await resCommodities.json();
+  const handcrafts: HandCrafts = await resHandcrafts.json();
+
+  return {
+    props: {
+      travels,
+      commodities,
+      handcrafts,
+    },
+    revalidate: 1,
+  };
+};
+
+const Home: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = ({
+  travels,
+  commodities,
+  handcrafts,
+}) => {
+  const [activeTravel, setActiveTravel] = useState<Travel>(travels.data.data[0]);
+
   return (
     <>
       <Head>
@@ -83,7 +122,7 @@ export default function Home() {
           <h2 className="lg:text-h2 md:text-h3 text-h4 mb-3 lg:mb-0 text-black font-medium mr-0 lg:mr-14">
             Wisata
           </h2>
-          <Button variant="outlined" color="red">
+          <Button href="/wisata" variant="outlined" color="red">
             Lihat lebih lengkap
           </Button>
         </div>
@@ -95,18 +134,21 @@ export default function Home() {
               layout="responsive"
               width={1200}
               height={900}
-              src={DummyWisata}
+              src={activeTravel.image}
+              alt={activeTravel.name}
             />
           </div>
           <div className="text-black">
-            <h4 className="text-h4 font-medium mb-4 lg:mb-10">Pendakian Pusuk Buhit</h4>
+            <h4 className="text-h4 font-medium mb-4 lg:mb-10">{activeTravel.name}</h4>
             <p className="text-body-sm md:text-body text-justify mb-5">
-              Phasellus varius volutpat tellus ac sollicitudin. Suspendisse tempor ligula vitae dui
-              tempor egestas. Nulla pharetra felis a pretium vulputate. Nunc gravida lectus sapien,
-              quis eleifend sem volutpat ut. In hac habitasse platea dictumst. Etiam sed pretium
-              urna, sit amet faucibus tortor.
+              {activeTravel.short_description}
             </p>
-            <Button className="mx-auto md:m-0">Lihat Detail</Button>
+            <Button
+              href={`/wisata/${activeTravel.slug}@!@${activeTravel.id}`}
+              className="mx-auto md:m-0"
+            >
+              Lihat Detail
+            </Button>
           </div>
         </div>
         <div
@@ -116,50 +158,26 @@ export default function Home() {
           <div className="lg:hidden">
             <div className="w-6"></div>
           </div>
-          <div className="scroll-snap-child-start mr-4">
-            <CardImage
-              src={DummyWisata}
-              width={1200}
-              height={900}
-              layout="responsive"
-              text="Visit Tanjung Bunga Visit Tanjung Bunga Visit Tanjung Bunga Visit Tanjung Bunga Visit Tanjung Bunga Visit Tanjung Bunga"
-              hover
-              className="min-w-72 lg:min-w-full h-full"
-            />
-          </div>
-          <div className="scroll-snap-child-start mr-4">
-            <CardImage
-              src={DummyWisata}
-              width={1200}
-              height={900}
-              layout="responsive"
-              text="Visit Tanjung Bunga"
-              hover
-              className="min-w-72 lg:min-w-full h-full"
-            />
-          </div>
-          <div className="scroll-snap-child-start mr-4">
-            <CardImage
-              src={DummyWisata}
-              width={1200}
-              height={900}
-              layout="responsive"
-              text="Visit Tanjung Bunga"
-              hover
-              className="min-w-72 lg:min-w-full h-full"
-            />
-          </div>
-          <div className="scroll-snap-child-start">
-            <CardImage
-              src={DummyWisata}
-              width={1200}
-              height={900}
-              layout="responsive"
-              text="Visit Tanjung Bunga"
-              hover
-              className="min-w-72 lg:min-w-full h-full"
-            />
-          </div>
+          {travels.data.data?.map((travel) => (
+            <div
+              onMouseOver={() => setActiveTravel(travel)}
+              onFocus={() => console.log('focus')}
+              key={travel.id}
+              className="scroll-snap-child-start mr-4"
+            >
+              <CardImage
+                src={travel.image}
+                width={1200}
+                height={900}
+                layout="responsive"
+                text={travel.name}
+                hover
+                className={classNames('min-w-72 lg:min-w-full h-full')}
+                active={travel.id === activeTravel.id}
+                alt={travel.name}
+              />
+            </div>
+          ))}
           <div className="lg:hidden">
             <div className="w-6"></div>
           </div>
@@ -171,7 +189,7 @@ export default function Home() {
             <h2 className="text-h4 md:text-h2 mb-3 lg:mb-0 text-black font-medium mr-0 lg:mr-14">
               Komoditas
             </h2>
-            <Button variant="outlined" color="red">
+            <Button href="/komoditas" variant="outlined" color="red">
               Lihat lebih lengkap
             </Button>
           </div>
@@ -187,39 +205,21 @@ export default function Home() {
                 <div className="lg:hidden">
                   <div className="w-6"></div>
                 </div>
-                <div className="scroll-snap-child-start mr-4">
-                  <CardImage
-                    src={DummyWisata}
-                    width={1200}
-                    height={900}
-                    layout="responsive"
-                    text="Visit Tanjung Bunga"
-                    hover
-                    className="min-w-72 h-full lg:min-w-full"
-                  />
-                </div>
-                <div className="scroll-snap-child-start mr-4">
-                  <CardImage
-                    src="/assets/images/home-2.png"
-                    width={1200}
-                    height={900}
-                    layout="responsive"
-                    text="Visit Tanjung Bunga Hotel dengan pemandangan terbaik di Desa Tanjung Bunga Hotel dengan pemandangan terbaik di Desa Tanjung Bunga."
-                    hover
-                    className="min-w-72 h-full lg:min-w-full"
-                  />
-                </div>
-                <div className="scroll-snap-child-start">
-                  <CardImage
-                    src="/assets/images/home-2.png"
-                    width={1200}
-                    height={900}
-                    layout="responsive"
-                    text="Visit Tanjung Bunga"
-                    hover
-                    className="min-w-72 h-full lg:min-w-full"
-                  />
-                </div>
+                {commodities.data.data.map(({ id, slug, name, image }) => (
+                  <div key={id} className="scroll-snap-child-start mr-4">
+                    <CardImage
+                      src={image}
+                      width={1200}
+                      height={900}
+                      layout="responsive"
+                      text={name}
+                      hover
+                      className="min-w-72 h-full lg:min-w-full"
+                      href={`/komoditas/${slug}@!@${id}`}
+                      alt={name}
+                    />
+                  </div>
+                ))}
                 <div className="lg:hidden">
                   <div className="w-6"></div>
                 </div>
@@ -237,7 +237,7 @@ export default function Home() {
           <h2 className="md:text-h2 text-h4 mb-3 lg:mb-0 text-black font-medium lg:mr-14">
             Belanja
           </h2>
-          <Button variant="outlined" color="red">
+          <Button href="/kerajinan" variant="outlined" color="red">
             Lihat lebih lengkap
           </Button>
         </div>
@@ -248,38 +248,21 @@ export default function Home() {
             pilihan anda.
           </p>
           <div className="grid grid-cols-2 gap-3 lg:gap-6">
-            <CardImage
-              src={DummyWisata}
-              width={1200}
-              height={900}
-              layout="responsive"
-              text="Visit Tanjung Bunga"
-              hover
-            />
-            <CardImage
-              src={DummyWisata}
-              width={1200}
-              height={900}
-              layout="responsive"
-              text="Visit Tanjung Bunga"
-              hover
-            />
-            <CardImage
-              src={DummyWisata}
-              width={1200}
-              height={900}
-              layout="responsive"
-              text="Visit Tanjung Bunga"
-              hover
-            />
-            <CardImage
-              src={DummyWisata}
-              width={1200}
-              height={900}
-              layout="responsive"
-              text="Visit Tanjung Bunga"
-              hover
-            />
+            {handcrafts.data.data.map(({ id, slug, name, image }) => (
+              <div key={id} className="scroll-snap-child-start mr-4">
+                <CardImage
+                  src={image}
+                  width={1200}
+                  height={900}
+                  layout="responsive"
+                  text={name}
+                  hover
+                  className="min-w-72 h-full lg:min-w-full"
+                  href={`/kerajinan/${slug}@!@${id}`}
+                  alt={name}
+                />
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -339,4 +322,6 @@ export default function Home() {
       <Footer />
     </>
   );
-}
+};
+
+export default Home;

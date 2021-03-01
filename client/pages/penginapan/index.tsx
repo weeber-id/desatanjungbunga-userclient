@@ -3,7 +3,7 @@ import { ApiResponse, Lodging } from '../../@types';
 import { CardImage, Filter, Footer, Header, Pagination, TextField } from '../../components';
 import { urlApi } from '../../helpers/urlApi';
 
-type Lodgings = ApiResponse<Lodging[] | null>;
+export type Lodgings = ApiResponse<{ data: Lodging[]; maxPage: number } | null>;
 
 interface StaticProps {
   initialData: Lodgings;
@@ -42,15 +42,16 @@ const PenginapanPage: React.FC<InferGetStaticPropsType<typeof getStaticProps>> =
           style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))' }}
           className="grid gap-x-12 gap-y-10"
         >
-          {initialData.data?.map((lodging) => (
+          {initialData.data.data?.map(({ id, image, name, slug }) => (
             <CardImage
-              key={lodging.id}
-              src={lodging.image}
+              key={id}
+              src={image}
               width={1200}
               height={900}
               layout="responsive"
-              text={lodging.name}
+              text={name}
               hover
+              href={`/penginapan/${slug}@!@${id}`}
             />
           ))}
         </div>

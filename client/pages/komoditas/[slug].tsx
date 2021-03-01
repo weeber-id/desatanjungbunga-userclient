@@ -1,28 +1,37 @@
+import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next';
 import Image from 'next/image';
 import numeral from 'numeral';
-import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next';
 import { ApiResponse, Commodity } from '../../@types';
-import { DummyMasakan } from '../../assets';
 import { BreadCrumb, BreadCrumbItem, Button, Footer, Header, InfoDetail } from '../../components';
+import { Commodities } from './index';
 import { urlApi } from '../../helpers/urlApi';
+import { useRouter } from 'next/router';
 
 interface StaticProps {
   initialData: ApiResponse<Commodity>;
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
+  const res = await fetch(urlApi + '/culinaries');
+
+  const data: Commodities = await res.json();
+
+  const { id, slug } = data.data.data[0];
+
   return {
     fallback: true,
     paths: [
       {
-        params: { slug: 'asdf' },
+        params: { slug: slug + '@!@' + id },
       },
     ],
   };
 };
 
-export const getStaticProps: GetStaticProps<StaticProps> = async () => {
-  const res = await fetch(urlApi + '/culinary?id=6036fb449ff38f076a43a74f');
+export const getStaticProps: GetStaticProps<StaticProps> = async ({ params }) => {
+  const [slug, id] = params.slug.toString().split('@!@');
+
+  const res = await fetch(urlApi + `/culinary?id=${id}&slug=${slug}`);
 
   const initialData: ApiResponse<Commodity> = await res.json();
 
@@ -53,9 +62,14 @@ const KomoditasDetailPage: React.FC<InferGetStaticPropsType<typeof getStaticProp
     links,
     operation_time: { from, to },
     price,
+    image,
   } = initialData.data;
 
-  console.log(initialData.data);
+  const router = useRouter();
+
+  if (router.isFallback) {
+    return <div>Please Wait...</div>;
+  }
 
   return (
     <>
@@ -72,7 +86,7 @@ const KomoditasDetailPage: React.FC<InferGetStaticPropsType<typeof getStaticProp
         <div className="grid grid-cols-1 gap-y-4 md:grid-cols-2 gap-x-16">
           <div>
             <div className="sticky top-24">
-              <Image layout="responsive" width={1200} height={900} src={DummyMasakan} />
+              <Image layout="responsive" width={1200} height={900} src={image} />
             </div>
           </div>
           <div>

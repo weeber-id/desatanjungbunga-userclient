@@ -28,6 +28,7 @@ module.exports = withPlugins([[withImages, { fileExtensions: ['jpg', 'jpeg', 'pn
     return config;
   },
   images: {
-    domains: ['cdn.pixabay.com'],
+    // development purpose
+    domains: ['cdn.pixabay.com', 'www.jacksonhole.com', 'www.ecpi.edu', 'c8.alamy.com'],
   },
 });

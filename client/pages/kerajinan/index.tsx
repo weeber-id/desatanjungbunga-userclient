@@ -1,10 +1,9 @@
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import { ApiResponse, HandCraft } from '../../@types';
-import { DummyWisata } from '../../assets';
 import { CardImage, Filter, Footer, Header, Pagination, TextField } from '../../components';
 import { urlApi } from '../../helpers/urlApi';
 
-type HandCrafts = ApiResponse<HandCraft[] | null>;
+export type HandCrafts = ApiResponse<{ data: HandCraft[]; maxPage: number } | null>;
 
 interface StaticProps {
   initialData: HandCrafts;
@@ -23,7 +22,9 @@ export const getStaticProps: GetStaticProps<StaticProps> = async () => {
   };
 };
 
-const KerajinanPage: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = () => {
+const KerajinanPage: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = ({
+  initialData,
+}) => {
   return (
     <>
       <Header />
@@ -41,38 +42,18 @@ const KerajinanPage: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = 
           style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))' }}
           className="grid gap-x-12 gap-y-10"
         >
-          <CardImage
-            src={DummyWisata}
-            width={1200}
-            height={900}
-            layout="responsive"
-            text="Visit Tanjung Bunga"
-            hover
-          />
-          <CardImage
-            src={DummyWisata}
-            width={1200}
-            height={900}
-            layout="responsive"
-            text="Visit Tanjung Bunga"
-            hover
-          />
-          <CardImage
-            src={DummyWisata}
-            width={1200}
-            height={900}
-            layout="responsive"
-            text="Visit Tanjung Bunga"
-            hover
-          />
-          <CardImage
-            src={DummyWisata}
-            width={1200}
-            height={900}
-            layout="responsive"
-            text="Visit Tanjung Bunga"
-            hover
-          />
+          {initialData.data.data?.map(({ image, id, slug, name }) => (
+            <CardImage
+              key={id}
+              src={image}
+              width={1200}
+              height={900}
+              layout="responsive"
+              text={name}
+              hover
+              href={`/kerajinan/${slug}@!@${id}`}
+            />
+          ))}
         </div>
       </section>
       <section className="container mx-auto mb-16 px-10">

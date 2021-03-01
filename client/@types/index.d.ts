@@ -18,7 +18,7 @@ export type BaseElement = {
   name: string;
   short_description: string;
   description: string;
-  operation_time: OperationTime;
+  slug: string;
 };
 
 export type ApiResponse<T> = {
@@ -33,9 +33,20 @@ export type ApiResponse<T> = {
 export type Travel = BaseElement & {
   updatedAt: string;
   price: string;
+  operation_time: OperationTime;
 };
 
-export type Lodging = BaseElement;
+export type Lodging = BaseElement & {
+  price: {
+    value: number;
+    unit: string;
+  };
+  links: {
+    name: string;
+    link: string;
+  }[];
+  operation_time: string;
+};
 
 export type Commodity = BaseElement & {
   price: {
@@ -47,9 +58,17 @@ export type Commodity = BaseElement & {
     name: string;
     link: string;
   }[];
+  operation_time: OperationTime;
 };
 
-export type HandCraft = BaseElement;
+export type HandCraft = BaseElement & {
+  price: number;
+  links: {
+    name: string;
+    link: string;
+  }[];
+  operation_time: OperationTime;
+};
 
 type OperationTime = {
   from: {

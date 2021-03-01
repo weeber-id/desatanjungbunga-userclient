@@ -1,10 +1,9 @@
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import { ApiResponse, Commodity } from '../../@types';
-import { DummyMasakan } from '../../assets';
 import { CardImage, Filter, Footer, Header, Pagination, TextField } from '../../components';
 import { urlApi } from '../../helpers/urlApi';
 
-type Commodities = ApiResponse<Commodity[] | null>;
+export type Commodities = ApiResponse<{ data: Commodity[]; maxPage: number } | null>;
 
 interface StaticProps {
   initialData: Commodities;
@@ -43,15 +42,16 @@ const KomoditasPage: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = 
           style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))' }}
           className="grid gap-x-12 gap-y-10"
         >
-          {initialData.data?.map((commodity) => (
+          {initialData.data.data?.map(({ id, image, name, slug }) => (
             <CardImage
-              key={commodity.id}
-              src={DummyMasakan}
+              key={id}
+              src={image}
               width={1200}
               height={900}
               layout="responsive"
-              text={commodity.name}
+              text={name}
               hover
+              href={`/komoditas/${slug}@!@${id}`}
             />
           ))}
         </div>

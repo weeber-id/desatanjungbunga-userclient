@@ -16,6 +16,7 @@ interface CardImageProps {
   textSize?: 'body' | 'body-sm' | 'h5';
   hover?: boolean;
   href?: string;
+  active?: boolean;
 }
 
 const CardImage: React.FC<CardImageProps> = ({
@@ -32,13 +33,18 @@ const CardImage: React.FC<CardImageProps> = ({
   textSize = 'body',
   hover,
   href,
+  active,
 }) => {
   const component = (
     <div
-      className={classNames('px-2 py-2.5 border border-purple-light rounded-lg bg-white', {
-        [className]: className,
-        'hover:border-2 hover:border-purple cursor-pointer': hover,
-      })}
+      className={classNames(
+        'px-2 py-2.5 border-purple-light rounded-lg bg-white',
+        active ? 'border-2' : 'border',
+        {
+          [className]: className,
+          'hover:border-2 hover:border-purple cursor-pointer': hover,
+        }
+      )}
     >
       <Image
         className="rounded-lg"
