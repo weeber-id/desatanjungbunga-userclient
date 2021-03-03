@@ -4,6 +4,7 @@ import { useQuery } from 'react-query';
 import { ApiResponse, Commodity } from '../../@types';
 import { CardImage, Filter, Footer, Header, Pagination, TextField } from '../../components';
 import { urlApi } from '../../helpers/urlApi';
+import { useMedia } from '../../hooks/useMedia';
 
 export type Commodities = ApiResponse<{ data: Commodity[]; maxPage: number } | null>;
 
@@ -30,6 +31,9 @@ const KomoditasPage: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = 
   const [search, setSearch] = useState<string>('');
   const [sort, setSort] = useState<'terbaru' | 'terlama' | 'AtoZ'>();
   const [searchTrigger, setSearchTrigger] = useState<number>(1);
+
+  const isMedium = useMedia({ query: '(min-width: 768px)' });
+  const isSmall = useMedia({ query: '(max-width: 520px)' });
 
   const { data: commodities } = useQuery(
     ['commodities', searchTrigger, sort],
@@ -87,11 +91,13 @@ const KomoditasPage: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = 
         <div
           style={{
             gridTemplateColumns:
-              commodities.data.data?.length > 4
-                ? 'repeat(auto-fit, minmax(300px, 1fr))'
-                : 'repeat(4, 1fr)',
+              commodities.data.data?.length < 4 && isMedium
+                ? 'repeat(4, 1fr)'
+                : !isMedium && !isSmall
+                ? 'repeat(2, 1fr)'
+                : 'repeat(auto-fit, minmax(258px, 1fr))',
           }}
-          className="grid gap-x-12 gap-y-10"
+          className="grid gap-x-4 lg:gap-x-8 gap-y-10"
         >
           {commodities.data.data?.map(({ id, image, name, slug }) => (
             <CardImage
