@@ -249,28 +249,28 @@ const Home: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = ({
           </p>
           <div className="grid grid-cols-2 gap-3 lg:gap-6">
             {handcrafts.data.data.map(({ id, slug, name, image }) => (
-              <div key={id} className="scroll-snap-child-start mr-4">
-                <CardImage
-                  src={image}
-                  width={1200}
-                  height={900}
-                  layout="responsive"
-                  text={name}
-                  hover
-                  className="min-w-72 h-full lg:min-w-full"
-                  href={`/kerajinan/${slug}@!@${id}`}
-                  alt={name}
-                />
-              </div>
+              <CardImage
+                key={id}
+                src={image}
+                width={1200}
+                height={900}
+                layout="responsive"
+                text={name}
+                hover
+                href={`/kerajinan/${slug}@!@${id}`}
+                alt={name}
+              />
             ))}
           </div>
         </div>
       </section>
       <section className="container lg:px-10 mx-auto py-11">
         <h2 className="lg:text-h2 text-h4 text-center text-black font-medium mb-3">Artikel</h2>
-        <Button className="mx-auto" variant="outlined" color="red">
-          Lihat lebih lengkap
-        </Button>
+        <div className="flex justify-center">
+          <Button variant="outlined" color="red">
+            Lihat lebih lengkap
+          </Button>
+        </div>
         <div
           style={{ gridTemplateColumns: 'repeat(4, minmax(258px, 1fr))', scrollPadding: '0 24px' }}
           className="lg:grid scroll-snap-x-container flex flex-nowrap lg:gap-4 mt-12 lg:hidden-scrollbar overflow-auto"

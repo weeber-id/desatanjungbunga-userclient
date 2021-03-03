@@ -43,7 +43,7 @@ const TextField: React.FC<TextFieldProps> = ({
         <input
           {...otherProps}
           style={{ height: variant === 'search' ? '40px' : '32px' }}
-          type={type}
+          type={variant.startsWith('search') ? 'search' : type}
           className={classNames('focus:outline-none px-3', inputClassName, {
             'border-b text-body pl-11': variant === 'search',
             'w-full': fullWidth || width,

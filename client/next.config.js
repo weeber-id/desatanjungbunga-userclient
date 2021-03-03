@@ -29,6 +29,12 @@ module.exports = withPlugins([[withImages, { fileExtensions: ['jpg', 'jpeg', 'pn
   },
   images: {
     // development purpose
-    domains: ['cdn.pixabay.com', 'www.jacksonhole.com', 'www.ecpi.edu', 'c8.alamy.com'],
+    domains: [
+      'cdn.pixabay.com',
+      'www.jacksonhole.com',
+      'www.ecpi.edu',
+      'c8.alamy.com',
+      'visitmalone.com',
+    ],
   },
 });

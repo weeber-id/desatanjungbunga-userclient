@@ -11,6 +11,7 @@ interface FilterProps {
 
 const Filter: React.FC<FilterProps> = ({ className, onChange }) => {
   const [show, setShow] = useState<boolean>(false);
+  const [active, setActive] = useState<'terbaru' | 'terlama' | 'AtoZ' | undefined>();
   const triggerRef = useRef();
   const elemRef = useRef();
 
@@ -22,6 +23,7 @@ const Filter: React.FC<FilterProps> = ({ className, onChange }) => {
     const { value } = e.currentTarget;
 
     setShow(false);
+    setActive(value as 'terbaru' | 'terlama' | 'AtoZ');
     if (onChange) onChange(value as 'terbaru' | 'terlama' | 'AtoZ');
   };
 
@@ -49,21 +51,30 @@ const Filter: React.FC<FilterProps> = ({ className, onChange }) => {
             <button
               onClick={handleClick}
               value="terbaru"
-              className="md:text-body text-body-sm py-1 text-black hover:text-red focus:outline-none"
+              className={classNames(
+                'md:text-body text-body-sm py-1 hover:text-red focus:outline-none',
+                active === 'terbaru' ? 'text-red' : 'text-black'
+              )}
             >
               Terbaru
             </button>
             <button
               onClick={handleClick}
               value="terlama"
-              className="md:text-body text-body-sm py-1 text-black hover:text-red focus:outline-none"
+              className={classNames(
+                'md:text-body text-body-sm py-1 hover:text-red focus:outline-none',
+                active === 'terlama' ? 'text-red' : 'text-black'
+              )}
             >
               Terlama
             </button>
             <button
               onClick={handleClick}
               value="AtoZ"
-              className="md:text-body text-body-sm py-1 text-black hover:text-red focus:outline-none"
+              className={classNames(
+                'md:text-body text-body-sm py-1 hover:text-red focus:outline-none',
+                active === 'AtoZ' ? 'text-red' : 'text-black'
+              )}
             >
               A-Z
             </button>
