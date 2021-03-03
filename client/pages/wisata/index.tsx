@@ -1,5 +1,5 @@
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
-import { FormEvent, useState } from 'react';
+import { useState } from 'react';
 import { useQuery } from 'react-query';
 import { ApiResponse, Travel } from '../../@types';
 import { CardImage, Filter, Footer, Header, Pagination, TextField } from '../../components';
@@ -54,7 +54,7 @@ const WisataPage: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = ({ 
     setSearch(value);
   };
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     setSearchTrigger(searchTrigger + 1);
