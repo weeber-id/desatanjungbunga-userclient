@@ -15,7 +15,7 @@ const FasilitasIcon: React.FC<FasilitasIconProps> = ({ Icon, text, src }) => {
       {src && (
         <img
           style={{ height: 38, width: 38 }}
-          className="object-center object-cover"
+          className="object-center object-cover mr-3"
           src={src}
           alt={`icon ${text}`}
         />

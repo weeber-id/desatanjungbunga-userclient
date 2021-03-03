@@ -3,7 +3,6 @@ import Image from 'next/image';
 import numeral from 'numeral';
 import { Lodgings } from '.';
 import { ApiResponse, Lodging } from '../../@types';
-import { IconAirPanas } from '../../assets';
 import {
   BreadCrumb,
   BreadCrumbItem,
@@ -71,6 +70,7 @@ const PenginapanDetailPage: React.FC<InferGetStaticPropsType<typeof getStaticPro
     short_description,
     description,
     links,
+    facilities,
   } = initialData.data;
 
   return (
@@ -122,13 +122,13 @@ const PenginapanDetailPage: React.FC<InferGetStaticPropsType<typeof getStaticPro
               Fasilitas :
             </p>
             <div className="grid grid-cols-3 gap-y-10 mb-12">
-              <FasilitasIcon Icon={IconAirPanas} text="Kamar Mandi" />
-              <FasilitasIcon Icon={IconAirPanas} text="Kamar Mandi" />
-              <FasilitasIcon Icon={IconAirPanas} text="Kamar Mandi" />
-              <FasilitasIcon Icon={IconAirPanas} text="Kamar Mandi" />
-              <FasilitasIcon Icon={IconAirPanas} text="Kamar Mandi" />
-              <FasilitasIcon Icon={IconAirPanas} text="Kamar Mandi" />
-              <FasilitasIcon Icon={IconAirPanas} text="Kamar Mandi" />
+              {facilities ? (
+                facilities?.map(({ icon, name, id }) => (
+                  <FasilitasIcon key={id} text={name} src={icon} />
+                ))
+              ) : (
+                <span className="italic text-black">Data fasilitas tidak tersedia</span>
+              )}
             </div>
             <InfoDetail description={description} />
           </div>

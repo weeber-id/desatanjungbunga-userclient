@@ -46,6 +46,11 @@ export type Lodging = BaseElement & {
     link: string;
   }[];
   operation_time: string;
+  facilities: {
+    icon: string;
+    name: string;
+    id: string;
+  }[];
 };
 
 export type Commodity = BaseElement & {
