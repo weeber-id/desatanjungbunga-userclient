@@ -100,6 +100,7 @@ const WisataPage: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = ({ 
               layout="responsive"
               text={travel.name}
               hover
+              className="h-full"
               href={'/wisata/' + travel.slug + '@!@' + travel.id}
             />
           ))}

@@ -102,6 +102,7 @@ const KomoditasPage: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = 
               layout="responsive"
               text={name}
               hover
+              className="h-full"
               href={`/komoditas/${slug}@!@${id}`}
             />
           ))}
