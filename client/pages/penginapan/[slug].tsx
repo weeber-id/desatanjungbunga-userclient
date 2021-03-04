@@ -12,6 +12,7 @@ import {
   Footer,
   Header,
   InfoDetail,
+  LoadingPage,
 } from '../../components';
 import { urlApi } from '../../helpers/urlApi';
 
@@ -64,7 +65,7 @@ const PenginapanDetailPage: React.FC<InferGetStaticPropsType<typeof getStaticPro
   initialData,
 }) => {
   const router = useRouter();
-  if (router.isFallback) return <h1>Loading...</h1>;
+  if (router.isFallback) return <LoadingPage />;
 
   const {
     image,

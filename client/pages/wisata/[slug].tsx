@@ -9,6 +9,7 @@ import {
   Footer,
   Header,
   InfoDetail,
+  LoadingPage,
   RekomendasiTerdekat,
 } from '../../components';
 import { urlApi } from '../../helpers/urlApi';
@@ -63,7 +64,7 @@ const WisataDetailPage: React.FC<InferGetStaticPropsType<typeof getStaticProps>>
   initialData,
 }) => {
   const router = useRouter();
-  if (router.isFallback) return <h1>Loading...</h1>;
+  if (router.isFallback) return <LoadingPage />;
 
   const { data } = initialData;
   const { from, to } = data.operation_time;

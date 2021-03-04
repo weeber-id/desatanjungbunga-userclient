@@ -3,7 +3,15 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import numeral from 'numeral';
 import { ApiResponse, HandCraft } from '../../@types/types';
-import { BreadCrumb, BreadCrumbItem, Button, Footer, Header, InfoDetail } from '../../components';
+import {
+  BreadCrumb,
+  BreadCrumbItem,
+  Button,
+  Footer,
+  Header,
+  InfoDetail,
+  LoadingPage,
+} from '../../components';
 import { urlApi } from '../../helpers/urlApi';
 import { HandCrafts } from './index';
 
@@ -56,7 +64,7 @@ const KerajinanDetailPage: React.FC<InferGetStaticPropsType<typeof getStaticProp
   initialData,
 }) => {
   const router = useRouter();
-  if (router.isFallback) return <h1>Loading...</h1>;
+  if (router.isFallback) return <LoadingPage />;
 
   const {
     image,

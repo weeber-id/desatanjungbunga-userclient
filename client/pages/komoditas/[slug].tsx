@@ -2,7 +2,15 @@ import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next';
 import Image from 'next/image';
 import numeral from 'numeral';
 import { ApiResponse, Commodity } from '../../@types/types';
-import { BreadCrumb, BreadCrumbItem, Button, Footer, Header, InfoDetail } from '../../components';
+import {
+  BreadCrumb,
+  BreadCrumbItem,
+  Button,
+  Footer,
+  Header,
+  InfoDetail,
+  LoadingPage,
+} from '../../components';
 import { Commodities } from './index';
 import { urlApi } from '../../helpers/urlApi';
 import { useRouter } from 'next/router';
@@ -58,7 +66,7 @@ const KomoditasDetailPage: React.FC<InferGetStaticPropsType<typeof getStaticProp
   const router = useRouter();
 
   if (router.isFallback) {
-    return <div>Please Wait...</div>;
+    return <LoadingPage />;
   }
 
   const {
