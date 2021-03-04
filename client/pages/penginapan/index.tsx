@@ -6,14 +6,14 @@ import { CardImage, Filter, Footer, Header, Pagination, TextField } from '../../
 import { urlApi } from '../../helpers/urlApi';
 import { useMedia } from '../../hooks/useMedia';
 
-export type Lodgings = ApiResponse<{ data: Lodging[]; maxPage: number } | null>;
+export type Lodgings = ApiResponse<{ data: Lodging[]; max_page: number } | null>;
 
 interface StaticProps {
   initialData: Lodgings;
 }
 
 export const getStaticProps: GetStaticProps<StaticProps> = async () => {
-  const res = await fetch(urlApi + '/lodgings');
+  const res = await fetch(urlApi + '/lodgings?content_per_page=12&page=1');
 
   const initialData: Lodgings = await res.json();
 
@@ -31,12 +31,13 @@ const PenginapanPage: React.FC<InferGetStaticPropsType<typeof getStaticProps>> =
   const [search, setSearch] = useState<string>('');
   const [sort, setSort] = useState<'terbaru' | 'terlama' | 'AtoZ'>();
   const [searchTrigger, setSearchTrigger] = useState<number>(1);
+  const [currentPage, setCurrentPage] = useState<number>(1);
 
   const isMedium = useMedia({ query: '(min-width: 768px)' });
   const isSmall = useMedia({ query: '(max-width: 520px)' });
 
-  const { data: lodgings } = useQuery(
-    ['lodgings', searchTrigger, sort],
+  const { data: lodgings, isLoading } = useQuery(
+    ['lodgings', searchTrigger, sort, currentPage],
     () => {
       const queryParams = [];
       if (search) queryParams.push(`search=${search}`);
@@ -45,9 +46,11 @@ const PenginapanPage: React.FC<InferGetStaticPropsType<typeof getStaticProps>> =
       else if (sort === 'terlama') queryParams.push('sort_date=desc');
       else if (sort === 'AtoZ') queryParams.push('sort_title=asc');
 
-      if (queryParams.length > 0) queryParams[0] = `?${queryParams[0]}`;
+      if (queryParams.length > 0) queryParams[0] = `&${queryParams[0]}`;
 
-      return fetch(urlApi + `/lodgings${queryParams.join('&')}`).then((res) => res.json());
+      return fetch(
+        urlApi + `/lodgings?content_per_page=12&page=${currentPage}${queryParams.join('&')}`
+      ).then((res) => res.json());
     },
     {
       initialData,
@@ -116,7 +119,11 @@ const PenginapanPage: React.FC<InferGetStaticPropsType<typeof getStaticProps>> =
       </section>
       <section className="container mx-auto mb-16 px-10">
         <div className="flex justify-center">
-          <Pagination />
+          <Pagination
+            isDisabled={isLoading}
+            onChange={(cp) => setCurrentPage(cp)}
+            maxPage={lodgings.data.max_page}
+          />
         </div>
       </section>
       <Footer />

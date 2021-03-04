@@ -15,7 +15,7 @@ const Pagination: React.FC<PaginationProps> = ({ maxPage = 10, isDisabled, onCha
 
   const handleChangePage = (page: number) => {
     if (!isDisabled) setCurrentPage(page);
-    if (onChange) onChange(page);
+    if (onChange && !isDisabled) onChange(page);
   };
 
   if (maxPage >= 4 && currentPage <= maxPage - 4) {
@@ -104,7 +104,7 @@ const Pagination: React.FC<PaginationProps> = ({ maxPage = 10, isDisabled, onCha
     const el = [];
     let count = 0;
 
-    while (count < 4) {
+    while (count < maxPage) {
       const page = count + 1;
       el.push(
         <button

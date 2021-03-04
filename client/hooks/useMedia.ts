@@ -9,6 +9,7 @@ export const useMedia = (options: options) => {
   const { query } = options;
 
   useEffect(() => {
+    // server side rendering doesn't have window object
     if (typeof window !== 'undefined') {
       const matches = window.matchMedia(query);
 
