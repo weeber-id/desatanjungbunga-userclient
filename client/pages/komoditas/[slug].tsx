@@ -1,7 +1,7 @@
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next';
 import Image from 'next/image';
 import numeral from 'numeral';
-import { ApiResponse, Commodity } from '../../@types';
+import { ApiResponse, Commodity } from '../../@types/types';
 import { BreadCrumb, BreadCrumbItem, Button, Footer, Header, InfoDetail } from '../../components';
 import { Commodities } from './index';
 import { urlApi } from '../../helpers/urlApi';
@@ -55,6 +55,12 @@ export const getStaticProps: GetStaticProps<StaticProps> = async ({ params }) =>
 const KomoditasDetailPage: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = ({
   initialData,
 }) => {
+  const router = useRouter();
+
+  if (router.isFallback) {
+    return <div>Please Wait...</div>;
+  }
+
   const {
     name,
     description,
@@ -64,12 +70,6 @@ const KomoditasDetailPage: React.FC<InferGetStaticPropsType<typeof getStaticProp
     price,
     image,
   } = initialData.data;
-
-  const router = useRouter();
-
-  if (router.isFallback) {
-    return <div>Please Wait...</div>;
-  }
 
   return (
     <>

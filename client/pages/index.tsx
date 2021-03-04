@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import Head from 'next/head';
 import Image from 'next/image';
 import { useState } from 'react';
-import { Travel } from '../@types';
+import { Travel } from '../@types/types';
 import { DummyWisata } from '../assets';
 import { Button, CardImage, Footer, Header } from '../components';
 import { urlApi } from '../helpers/urlApi';

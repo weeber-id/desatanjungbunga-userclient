@@ -1,8 +1,9 @@
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import numeral from 'numeral';
 import { Lodgings } from '.';
-import { ApiResponse, Lodging } from '../../@types';
+import { ApiResponse, Lodging } from '../../@types/types';
 import {
   BreadCrumb,
   BreadCrumbItem,
@@ -62,6 +63,9 @@ export const getStaticProps: GetStaticProps<StaticProps> = async ({ params }) =>
 const PenginapanDetailPage: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = ({
   initialData,
 }) => {
+  const router = useRouter();
+  if (router.isFallback) return <h1>Loading...</h1>;
+
   const {
     image,
     name,

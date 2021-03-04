@@ -1,7 +1,7 @@
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import { useState } from 'react';
 import { useQuery } from 'react-query';
-import { ApiResponse, Lodging } from '../../@types';
+import { ApiResponse, Lodging } from '../../@types/types';
 import { CardImage, Filter, Footer, Header, Pagination, TextField } from '../../components';
 import { urlApi } from '../../helpers/urlApi';
 import { useMedia } from '../../hooks/useMedia';
