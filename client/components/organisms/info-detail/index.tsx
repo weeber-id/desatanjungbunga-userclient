@@ -47,7 +47,10 @@ const InfoDetail: React.FC<Props> = ({ description }) => {
         </div>
         <div className="mb-16 px-4">
           {active === 'detail' ? (
-            <p className="text-body-sm md:text-body">{description}</p>
+            <p
+              className="text-body-sm md:text-body"
+              dangerouslySetInnerHTML={{ __html: description }}
+            ></p>
           ) : (
             <>
               <Button onClick={() => setTanyaJawab(true)} className="mb-6">

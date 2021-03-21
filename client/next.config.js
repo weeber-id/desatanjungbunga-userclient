@@ -35,6 +35,7 @@ module.exports = withPlugins([[withImages, { fileExtensions: ['jpg', 'jpeg', 'pn
       'www.ecpi.edu',
       'c8.alamy.com',
       'visitmalone.com',
+      'storages.weeber.id',
     ],
   },
 });

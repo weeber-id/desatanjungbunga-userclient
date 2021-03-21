@@ -1,9 +1,12 @@
+import dayjs from 'dayjs';
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import numeral from 'numeral';
+import { useState, useMemo } from 'react';
 import { Lodgings } from '.';
 import { ApiResponse, Lodging } from '../../@types/types';
+import { IconOpen } from '../../assets';
 import {
   BreadCrumb,
   BreadCrumbItem,
@@ -13,8 +16,9 @@ import {
   Header,
   InfoDetail,
   LoadingPage,
+  OpenHour,
 } from '../../components';
-import { urlApi } from '../../helpers/urlApi';
+import { DayHashMap, urlApi } from '../../helpers';
 
 interface StaticProps {
   initialData: ApiResponse<Lodging>;
@@ -64,8 +68,7 @@ export const getStaticProps: GetStaticProps<StaticProps> = async ({ params }) =>
 const PenginapanDetailPage: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = ({
   initialData,
 }) => {
-  const router = useRouter();
-  if (router.isFallback) return <LoadingPage />;
+  const [openHour, setOpenHour] = useState<boolean>(false);
 
   const {
     image,
@@ -78,8 +81,30 @@ const PenginapanDetailPage: React.FC<InferGetStaticPropsType<typeof getStaticPro
     facilities,
   } = initialData.data;
 
+  const today = new Date().getDay();
+  const todayString = DayHashMap[today];
+  const todayOperationTime = operation_time[todayString];
+
+  const isOpen = useMemo(() => {
+    const { open } = todayOperationTime;
+
+    const date = dayjs().format('D MMMM YYYY');
+
+    const from = dayjs(new Date(`${date} ${todayOperationTime.from} GMT+0700`)).valueOf();
+    const to = dayjs(new Date(`${date} ${todayOperationTime.to} GMT+0700`)).valueOf();
+    const now = dayjs().valueOf();
+
+    return open && to > now && from < now;
+  }, [todayOperationTime]);
+
+  const router = useRouter();
+  if (router.isFallback) return <LoadingPage />;
+
   return (
     <>
+      {openHour && (
+        <OpenHour onClose={() => setOpenHour(false)} title={name} operationTime={operation_time} />
+      )}
       <Header />
       <section style={{ paddingTop: 38 * 4 }} className="bg-blue-light mb-16">
         <div className="container mx-auto px-6 md:px-10 flex justify-end pb-4">
@@ -93,7 +118,7 @@ const PenginapanDetailPage: React.FC<InferGetStaticPropsType<typeof getStaticPro
         <div className="grid grid-cols-1 gap-y-4 md:grid-cols-2 gap-x-16">
           <div>
             <div className="sticky top-24">
-              <Image layout="responsive" width={1200} height={900} src={image} />
+              <Image layout="responsive" width={1200} height={900} src={image || '/'} />
             </div>
           </div>
           <div>
@@ -104,7 +129,24 @@ const PenginapanDetailPage: React.FC<InferGetStaticPropsType<typeof getStaticPro
             <h4 className="md:text-h4 text-h5 text-black font-medium mb-1">
               Rp {numeral(price.value).format('0,0')}/{price.unit}
             </h4>
-            <p className="md:text-body text-body-sm text-black mb-8">{operation_time}</p>
+            <div className="flex items-center mb-8">
+              <p className="md:text-body text-body-sm text-black mr-2">
+                Jam:&nbsp;
+                {isOpen ? (
+                  <>
+                    <span className="text-[#30AB3D]">Buka &#8226;</span> Tutup pukul{' '}
+                    {todayOperationTime.to}
+                  </>
+                ) : (
+                  <>
+                    <span className="text-red">Tutup</span>
+                  </>
+                )}
+              </p>
+              <button onClick={() => setOpenHour(true)}>
+                <IconOpen />
+              </button>
+            </div>
             <p className="md:text-body text-body-sm text-purple-light mb-3 font-bold">
               Sekilas Tentang {name} :
             </p>
@@ -115,6 +157,8 @@ const PenginapanDetailPage: React.FC<InferGetStaticPropsType<typeof getStaticPro
             <div className="flex items-center mb-10">
               {links.map((link) => {
                 if (!link.link.includes('http')) link.link = 'https://' + link.link;
+
+                if (!link.name) return;
 
                 return (
                   <Button isExternal href={link.link} className="mr-6 last:mr-0" key={link.link}>

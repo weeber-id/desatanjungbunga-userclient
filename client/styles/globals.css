@@ -70,3 +70,7 @@
 .scroll-snap-child-start {
   scroll-snap-align: start;
 }
+
+.ic-black path {
+  fill: #393b3d;
+}

@@ -19,7 +19,7 @@ export type ApiResponse<T> = {
 export type Travel = BaseElement & {
   updatedAt: string;
   price: string;
-  operation_time: OperationTime;
+  operation_time: OperationTimeState;
 };
 
 export type Lodging = BaseElement & {
@@ -31,7 +31,7 @@ export type Lodging = BaseElement & {
     name: string;
     link: string;
   }[];
-  operation_time: string;
+  operation_time: OperationTimeState;
   facilities: {
     icon: string;
     name: string;
@@ -49,7 +49,7 @@ export type Commodity = BaseElement & {
     name: string;
     link: string;
   }[];
-  operation_time: OperationTime;
+  operation_time: OperationTimeState;
 };
 
 export type HandCraft = BaseElement & {
@@ -58,16 +58,43 @@ export type HandCraft = BaseElement & {
     name: string;
     link: string;
   }[];
-  operation_time: OperationTime;
+  operation_time: OperationTimeState;
 };
 
-type OperationTime = {
-  from: {
-    day: string;
-    time: string;
+export type OperationTimeState = {
+  monday: {
+    open: boolean;
+    from: string;
+    to: string;
   };
-  to: {
-    day: string;
-    time: string;
+  tuesday: {
+    open: boolean;
+    from: string;
+    to: string;
+  };
+  wednesday: {
+    open: boolean;
+    from: string;
+    to: string;
+  };
+  thursday: {
+    open: boolean;
+    from: string;
+    to: string;
+  };
+  friday: {
+    open: boolean;
+    from: string;
+    to: string;
+  };
+  saturday: {
+    open: boolean;
+    from: string;
+    to: string;
+  };
+  sunday: {
+    open: boolean;
+    from: string;
+    to: string;
   };
 };

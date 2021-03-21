@@ -1,27 +1,13 @@
-import IconFacebook from './icon-facebook.svg';
-import IconInstagram from './icon-instagram.svg';
-import IconNotFound from './icon-not-found.svg';
-import IconSearch from './icon-search.svg';
-import IconTanjungBunga from './icon-tanjungbunga.svg';
-import IconArrowRight from './icon-arrow-right.svg';
-import IconArrowLeft from './icon-arrow-left.svg';
-import IconAccordionDropdown from './icon-accordion-dropdown.svg';
-import IconClose from './icon-close.svg';
-import IconAirPanas from './icon-air-panas.svg';
-import IconWhatsapp from './icon-whatsapp.svg';
-import IconHamburger from './icon-hamburger.svg';
-
-export {
-  IconFacebook,
-  IconInstagram,
-  IconNotFound,
-  IconSearch,
-  IconTanjungBunga,
-  IconArrowRight,
-  IconArrowLeft,
-  IconAccordionDropdown,
-  IconClose,
-  IconAirPanas,
-  IconWhatsapp,
-  IconHamburger,
-};
+export { default as IconFacebook } from './icon-facebook.svg';
+export { default as IconInstagram } from './icon-instagram.svg';
+export { default as IconNotFound } from './icon-not-found.svg';
+export { default as IconSearch } from './icon-search.svg';
+export { default as IconTanjungBunga } from './icon-tanjungbunga.svg';
+export { default as IconArrowRight } from './icon-arrow-right.svg';
+export { default as IconArrowLeft } from './icon-arrow-left.svg';
+export { default as IconAccordionDropdown } from './icon-accordion-dropdown.svg';
+export { default as IconClose } from './icon-close.svg';
+export { default as IconAirPanas } from './icon-air-panas.svg';
+export { default as IconWhatsapp } from './icon-whatsapp.svg';
+export { default as IconHamburger } from './icon-hamburger.svg';
+export { default as IconOpen } from './icon-open.svg';
