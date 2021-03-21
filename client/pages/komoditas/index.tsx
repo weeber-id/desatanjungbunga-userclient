@@ -98,14 +98,14 @@ const KomoditasPage: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = 
                 ? 'repeat(4, 1fr)'
                 : !isMedium && !isSmall
                 ? 'repeat(2, 1fr)'
-                : 'repeat(auto-fit, minmax(258px, 1fr))',
+                : 'repeat(auto-fit, minmax(270px, 1fr))',
           }}
           className="grid gap-x-4 lg:gap-x-8 gap-y-10"
         >
           {commodities.data.data?.map(({ id, image, name, slug }) => (
             <CardImage
               key={id}
-              src={image}
+              src={image || '/'}
               width={1200}
               height={900}
               layout="responsive"
