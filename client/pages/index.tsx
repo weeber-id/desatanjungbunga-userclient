@@ -166,7 +166,7 @@ const Home: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = ({
               className="scroll-snap-child-start mr-4"
             >
               <CardImage
-                src={travel.image || DummyWisata}
+                src={travel.image || '/'}
                 width={1200}
                 height={900}
                 layout="responsive"
@@ -208,7 +208,7 @@ const Home: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = ({
                 {commodities.data.data.map(({ id, slug, name, image }) => (
                   <div key={id} className="scroll-snap-child-start mr-4">
                     <CardImage
-                      src={image || DummyWisata}
+                      src={image || '/'}
                       width={1200}
                       height={900}
                       layout="responsive"
@@ -251,7 +251,7 @@ const Home: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = ({
             {handcrafts.data.data.map(({ id, slug, name, image }) => (
               <CardImage
                 key={id}
-                src={image || DummyWisata}
+                src={image || '/'}
                 width={1200}
                 height={900}
                 layout="responsive"
