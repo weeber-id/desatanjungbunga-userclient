@@ -103,7 +103,7 @@ const WisataPage: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = ({ 
           {travels.data.data?.map((travel) => (
             <CardImage
               key={travel.id}
-              src={travel.image}
+              src={travel.image || '/'}
               width={1200}
               height={900}
               layout="responsive"
