@@ -1,3 +1,5 @@
+import { OperationTimeState } from '../@types/types';
+
 export const DayHashMap = {
   0: 'sunday',
   1: 'monday',
@@ -25,5 +27,43 @@ export const DayHashMap = {
       default:
         return '';
     }
+  },
+};
+
+export const defaultOperationTIme: OperationTimeState = {
+  monday: {
+    open: false,
+    from: '08:00',
+    to: '20:00',
+  },
+  tuesday: {
+    open: false,
+    from: '08:00',
+    to: '20:00',
+  },
+  wednesday: {
+    open: false,
+    from: '08:00',
+    to: '20:00',
+  },
+  thursday: {
+    open: false,
+    from: '08:00',
+    to: '20:00',
+  },
+  friday: {
+    open: false,
+    from: '08:00',
+    to: '20:00',
+  },
+  saturday: {
+    open: false,
+    from: '08:00',
+    to: '20:00',
+  },
+  sunday: {
+    open: false,
+    from: '08:00',
+    to: '20:00',
   },
 };

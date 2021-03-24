@@ -1,4 +1,5 @@
 import dayjs from 'dayjs';
+import { AnimatePresence } from 'framer-motion';
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
@@ -16,7 +17,7 @@ import {
   LoadingPage,
   OpenHour,
 } from '../../components';
-import { DayHashMap } from '../../helpers';
+import { DayHashMap, defaultOperationTIme } from '../../helpers';
 import { urlApi } from '../../helpers/urlApi';
 import { HandCrafts } from './index';
 
@@ -70,14 +71,26 @@ const KerajinanDetailPage: React.FC<InferGetStaticPropsType<typeof getStaticProp
 }) => {
   const Router = useRouter();
 
+  if (!initialData?.data) {
+    // eslint-disable-next-line
+    // @ts-ignore
+    initialData = {};
+    // eslint-disable-next-line
+    // @ts-ignore
+    initialData.data = {};
+  }
+
   const {
-    image,
-    name,
-    operation_time,
-    price,
-    short_description,
-    description,
-    links,
+    id = '',
+    image = '',
+    name = '',
+    operation_time = {
+      ...defaultOperationTIme,
+    },
+    price = 0,
+    short_description = '',
+    description = '',
+    links = [],
   } = initialData.data;
 
   const [openHour, setOpenHour] = useState<boolean>(false);
@@ -102,9 +115,15 @@ const KerajinanDetailPage: React.FC<InferGetStaticPropsType<typeof getStaticProp
 
   return (
     <>
-      {openHour && (
-        <OpenHour onClose={() => setOpenHour(false)} title={name} operationTime={operation_time} />
-      )}
+      <AnimatePresence exitBeforeEnter>
+        {openHour && (
+          <OpenHour
+            onClose={() => setOpenHour(false)}
+            title={name}
+            operationTime={operation_time}
+          />
+        )}
+      </AnimatePresence>
       <Header />
       <section style={{ paddingTop: 38 * 4 }} className="bg-blue-light mb-16">
         <div className="container mx-auto px-6 md:px-10 flex justify-end pb-4">
@@ -168,7 +187,12 @@ const KerajinanDetailPage: React.FC<InferGetStaticPropsType<typeof getStaticProp
               })}
               <Button className="mr-6">Tokopedia</Button>
             </div>
-            <InfoDetail description={description} />
+            <InfoDetail
+              title={name}
+              content_name="handcraft"
+              content_id={id}
+              description={description}
+            />
           </div>
         </div>
       </section>

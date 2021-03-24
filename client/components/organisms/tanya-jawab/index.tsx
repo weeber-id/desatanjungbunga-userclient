@@ -1,14 +1,40 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { IconClose } from '../../../assets';
 import { Button, TextField } from '../../atoms';
+import { useMutation, useQueryClient } from 'react-query';
+import { urlApi } from '../../../helpers';
 
 interface TanyaJawabProps {
   onCancel?: () => void;
+  type?: 'jawab' | 'tanya';
+  name?: string;
+  created_at?: string;
+  title?: string;
+  body?: string;
+  content_id?: string;
+  content_name?: 'article' | 'travel' | 'culinary' | 'handcraft' | 'lodging';
+  question_id?: string;
 }
 
-const TanyaJawab: React.FC<TanyaJawabProps> = ({ onCancel }) => {
+const TanyaJawab: React.FC<TanyaJawabProps> = ({
+  onCancel,
+  type,
+  name,
+  created_at,
+  title,
+  body,
+  content_id,
+  content_name,
+  question_id,
+}) => {
+  const queryClient = useQueryClient();
+
   const [textArea, setTextArea] = useState<string>('');
+  const [state, setState] = useState({
+    name: '',
+    email: '',
+  });
 
   const variants = {
     hidden: {
@@ -26,6 +52,40 @@ const TanyaJawab: React.FC<TanyaJawabProps> = ({ onCancel }) => {
 
     setTextArea(value);
   };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+
+    setState({
+      ...state,
+      [name]: value,
+    });
+  };
+
+  const handleTanya = useMutation(
+    () => {
+      const body = {
+        ...state,
+        body: textArea,
+        question_id: type === 'jawab' ? question_id : null,
+        content_name,
+        content_id,
+      };
+
+      return fetch(urlApi + '/discussion/create', {
+        method: 'POST',
+        body: JSON.stringify(body),
+      });
+    },
+    {
+      onSuccess: () => {
+        queryClient.refetchQueries({
+          queryKey: 'question',
+        });
+        onCancel();
+      },
+    }
+  );
 
   return (
     <motion.div
@@ -52,16 +112,20 @@ const TanyaJawab: React.FC<TanyaJawabProps> = ({ onCancel }) => {
           </button>
         </div>
         <p className="md:text-body-sm text-body-xs text-grey pb-6 border-b border-purple-light">
-          Pendakian Pusuk Bukit
+          {title}
         </p>
-        <div className="mt-6 mb-4 flex items-center justify-between">
-          <span className="md:text-body text-body-sm font-medium text-red">Jane Doe</span>
-          <span className="md:text-body-sm text-body-xs text-grey">1d</span>
-        </div>
-        <p className="md:text-body-sm text-body-xs text-black mb-4 md:mb-9">
-          Syntheses a mote of dust suspended in a sunbeam?
+        {type === 'jawab' && (
+          <>
+            <div className="mt-6 mb-4 flex items-center justify-between">
+              <span className="md:text-body text-body-sm font-medium text-red">{name}</span>
+              <span className="md:text-body-sm text-body-xs text-grey">{created_at}</span>
+            </div>
+            <p className="md:text-body-sm text-body-xs text-black">{body}</p>{' '}
+          </>
+        )}
+        <p className="text-black font-medium text-body-sm mb-1.5 mt-4 md:mt-9">
+          {type === 'jawab' ? 'Jawab' : 'Ajukan pertanyaan'}
         </p>
-        <p className="text-black font-medium text-body-sm mb-1.5">Jawab</p>
         <textarea
           onChange={handleChangeTextArea}
           value={textArea}
@@ -79,6 +143,9 @@ const TanyaJawab: React.FC<TanyaJawabProps> = ({ onCancel }) => {
             fullWidth
             placeholder="Jane Doe"
             inputClassName="md:text-body-sm text-body-xs"
+            name="name"
+            value={state.name}
+            onChange={handleChange}
           />
           <TextField
             errorMessage="Field wajib diisi"
@@ -86,9 +153,18 @@ const TanyaJawab: React.FC<TanyaJawabProps> = ({ onCancel }) => {
             fullWidth
             placeholder="janedoe@gmail.com"
             inputClassName="md:text-body-sm text-body-xs"
+            name="email"
+            value={state.email}
+            onChange={handleChange}
           />
         </div>
-        <Button className="mb-6" customHeight style={{ height: 38 }}>
+        <Button
+          onClick={() => handleTanya.mutate()}
+          className="mb-6"
+          customHeight
+          style={{ height: 38 }}
+          isLoading={handleTanya.isLoading}
+        >
           Post
         </Button>
       </motion.div>

@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+import { motion } from 'framer-motion';
 import { OperationTimeState } from '../../../@types/types';
 import { IconClose } from '../../../assets';
 import { DayHashMap } from '../../../helpers';
@@ -10,6 +11,17 @@ interface OpenHourProps {
 }
 
 const OpenHour: React.FC<OpenHourProps> = ({ operationTime, onClose, title }) => {
+  const variants = {
+    hidden: {
+      y: 100,
+      opacity: 0,
+    },
+    show: {
+      y: 0,
+      opacity: 1,
+    },
+  };
+
   const createOpenHour = () => {
     let i = new Date().getDay();
     const items = [];
@@ -48,8 +60,20 @@ const OpenHour: React.FC<OpenHourProps> = ({ operationTime, onClose, title }) =>
   };
 
   return (
-    <div className="fixed w-full h-full top-0 left-0 bg-black bg-opacity-20 flex justify-center items-center z-50">
-      <div className="bg-white w-full max-w-sm">
+    <motion.div
+      animate={{ opacity: 1 }}
+      initial={{ opacity: 0 }}
+      exit={{ opacity: 0 }}
+      style={{ zIndex: 120 }}
+      className="fixed flex justify-center items-center top-0 left-0 w-full h-full overflow-auto bg-black bg-opacity-10"
+    >
+      <motion.div
+        initial="hidden"
+        animate="show"
+        exit="hidden"
+        variants={variants}
+        className="bg-white w-full max-w-sm"
+      >
         <div className="px-8 pt-8 pb-4 border-b border-grey-light">
           <div className="flex items-center justify-between">
             <span className="text-body text-black">Jam Buka</span>
@@ -60,8 +84,8 @@ const OpenHour: React.FC<OpenHourProps> = ({ operationTime, onClose, title }) =>
           <div className="text-grey mt-2">{title}</div>
         </div>
         <div className="p-8">{createOpenHour()}</div>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 };
 

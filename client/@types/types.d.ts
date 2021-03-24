@@ -98,3 +98,14 @@ export type OperationTimeState = {
     to: string;
   };
 };
+
+export type Discussion = {
+  body: string;
+  content_id: string;
+  content_name: 'article' | 'travel' | 'culinary' | 'handcraft' | 'lodging';
+  created_at: string;
+  email: string;
+  id: string;
+  name: string;
+  questions: Discussion[] | null;
+};

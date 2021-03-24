@@ -1,4 +1,5 @@
 import dayjs from 'dayjs';
+import { AnimatePresence } from 'framer-motion';
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
@@ -18,7 +19,7 @@ import {
   LoadingPage,
   OpenHour,
 } from '../../components';
-import { DayHashMap, urlApi } from '../../helpers';
+import { DayHashMap, defaultOperationTIme, urlApi } from '../../helpers';
 
 interface StaticProps {
   initialData: ApiResponse<Lodging>;
@@ -48,6 +49,8 @@ export const getStaticProps: GetStaticProps<StaticProps> = async ({ params }) =>
 
   const initialData: ApiResponse<Lodging> = await res.json();
 
+  console.log(initialData.meta);
+
   if (initialData.meta.code === 404) {
     return {
       redirect: {
@@ -70,16 +73,31 @@ const PenginapanDetailPage: React.FC<InferGetStaticPropsType<typeof getStaticPro
 }) => {
   const [openHour, setOpenHour] = useState<boolean>(false);
 
+  if (!initialData?.data) {
+    // eslint-disable-next-line
+    // @ts-ignore
+    initialData = {};
+    // eslint-disable-next-line
+    // @ts-ignore
+    initialData.data = {};
+  }
+
   const {
-    image,
-    name,
-    operation_time,
-    price,
-    short_description,
-    description,
-    links,
-    facilities,
-  } = initialData.data;
+    id = '',
+    image = '',
+    name = '',
+    operation_time = {
+      ...defaultOperationTIme,
+    },
+    price = {
+      unit: '',
+      value: '',
+    },
+    short_description = '',
+    description = '',
+    links = [],
+    facilities = [],
+  } = initialData?.data;
 
   const today = new Date().getDay();
   const todayString = DayHashMap[today];
@@ -102,9 +120,15 @@ const PenginapanDetailPage: React.FC<InferGetStaticPropsType<typeof getStaticPro
 
   return (
     <>
-      {openHour && (
-        <OpenHour onClose={() => setOpenHour(false)} title={name} operationTime={operation_time} />
-      )}
+      <AnimatePresence exitBeforeEnter>
+        {openHour && (
+          <OpenHour
+            onClose={() => setOpenHour(false)}
+            title={name}
+            operationTime={operation_time}
+          />
+        )}
+      </AnimatePresence>
       <Header />
       <section style={{ paddingTop: 38 * 4 }} className="bg-blue-light mb-16">
         <div className="container mx-auto px-6 md:px-10 flex justify-end pb-4">
@@ -126,10 +150,10 @@ const PenginapanDetailPage: React.FC<InferGetStaticPropsType<typeof getStaticPro
             <p className="md:text-body text-body-sm text-purple-light mb-3 font-bold">
               Harga mulai:
             </p>
-            <h4 className="md:text-h4 text-h5 text-black font-medium mb-1">
+            <h4 className="md:text-h4 text-h5 text-black font-medium mb-2">
               Rp {numeral(price.value).format('0,0')}/{price.unit}
             </h4>
-            <div className="flex items-center mb-8">
+            <div className="flex items-center mb-7">
               <p className="md:text-body text-body-sm text-black mr-2">
                 Jam:&nbsp;
                 {isOpen ? (
@@ -170,7 +194,7 @@ const PenginapanDetailPage: React.FC<InferGetStaticPropsType<typeof getStaticPro
             <p className="md:text-body text-body-sm text-purple-light mb-5 font-bold">
               Fasilitas :
             </p>
-            <div className="grid grid-cols-3 gap-y-10 mb-12">
+            <div className="grid grid-cols-3 gap-x-4 gap-y-10 mb-12">
               {facilities ? (
                 facilities?.map(({ icon, name, id }) => (
                   <FasilitasIcon key={id} text={name} src={icon} />
@@ -179,7 +203,12 @@ const PenginapanDetailPage: React.FC<InferGetStaticPropsType<typeof getStaticPro
                 <span className="italic text-black">Data fasilitas tidak tersedia</span>
               )}
             </div>
-            <InfoDetail description={description} />
+            <InfoDetail
+              content_id={id}
+              content_name="lodging"
+              title={name}
+              description={description}
+            />
           </div>
         </div>
       </section>
