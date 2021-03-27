@@ -1,4 +1,5 @@
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
+import Head from 'next/head';
 import { useState } from 'react';
 import { useQuery } from 'react-query';
 import { ApiResponse, HandCraft } from '../../@types/types';
@@ -71,6 +72,13 @@ const KerajinanPage: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = 
 
   return (
     <>
+      <Head>
+        <title>Kerajinan | Wisata Samosir</title>
+        <meta
+          name="description"
+          content="Tempat menemukan kerajinan khas yang indah nan elok di Kabupaten Samosir Desa Tanjung Bunga. Kerajinan khas Samosir yang dapat dijadikan oleh-oleh maupun hiasan dan keperluan lainnya."
+        />
+      </Head>
       <Header />
       <section className="container mx-auto px-10">
         <h2 className="text-center font-medium text-h4 lg:text-h2 mt-48 mb-7">Kerajinan</h2>

@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import Image from 'next/image';
 import { IconWhatsapp } from '../../assets';
 import { Button, Footer, Header } from '../../components';
@@ -5,6 +6,13 @@ import { Button, Footer, Header } from '../../components';
 const ContactPage = () => {
   return (
     <>
+      <Head>
+        <title>Kontak | Wisata Samosir</title>
+        <meta
+          name="description"
+          content="Kontak kantor Desa Wisata Tanjung Bunga, Kabupaten Samosir. Kontak pengelola wisata Desa Wisata Tanjung Bunga, Kab. Samosir."
+        />
+      </Head>
       <Header />
       <h3 className="text-center text-purple md:text-h3 text-h5 mt-48 font-medium mb-11">
         Hubungi Kami

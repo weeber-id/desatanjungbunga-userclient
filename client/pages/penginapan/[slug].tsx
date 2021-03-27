@@ -1,6 +1,8 @@
+import { data } from 'autoprefixer';
 import dayjs from 'dayjs';
 import { AnimatePresence } from 'framer-motion';
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next';
+import Head from 'next/head';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import numeral from 'numeral';
@@ -120,6 +122,10 @@ const PenginapanDetailPage: React.FC<InferGetStaticPropsType<typeof getStaticPro
 
   return (
     <>
+      <Head>
+        <title>Penginapan | {name}</title>
+        <meta name="description" content={short_description} />
+      </Head>
       <AnimatePresence exitBeforeEnter>
         {openHour && (
           <OpenHour

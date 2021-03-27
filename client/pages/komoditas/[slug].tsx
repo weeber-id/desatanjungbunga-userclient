@@ -20,6 +20,7 @@ import { useMemo, useState } from 'react';
 import { DayHashMap, defaultOperationTIme } from '../../helpers';
 import dayjs from 'dayjs';
 import { IconOpen } from '../../assets';
+import Head from 'next/head';
 
 interface StaticProps {
   initialData: ApiResponse<Commodity>;
@@ -119,6 +120,10 @@ const KomoditasDetailPage: React.FC<InferGetStaticPropsType<typeof getStaticProp
 
   return (
     <>
+      <Head>
+        <title>Komoditas | {name}</title>
+        <meta name="description" content={short_description} />
+      </Head>
       <AnimatePresence exitBeforeEnter>
         {openHour && (
           <OpenHour

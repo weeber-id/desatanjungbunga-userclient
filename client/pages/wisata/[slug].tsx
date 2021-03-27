@@ -1,5 +1,6 @@
 import dayjs from 'dayjs';
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next';
+import Head from 'next/head';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import numeral from 'numeral';
@@ -95,6 +96,10 @@ const WisataDetailPage: React.FC<InferGetStaticPropsType<typeof getStaticProps>>
 
   return (
     <>
+      <Head>
+        <title>Wisata | {data.name}</title>
+        <meta name="description" content={data.short_description} />
+      </Head>
       {openHour && (
         <OpenHour
           onClose={() => setOpenHour(false)}
