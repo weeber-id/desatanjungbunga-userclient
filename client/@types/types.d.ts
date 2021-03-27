@@ -109,3 +109,24 @@ export type Discussion = {
   name: string;
   questions: Discussion[] | null;
 };
+
+export type Article = {
+  id: string;
+  author: string;
+  body: string;
+  created_at: string;
+  recommendation: boolean;
+  slug: string;
+  title: string;
+  updated_at: string;
+  active: boolean;
+  image_cover: string;
+};
+
+export type About = {
+  id: string;
+  name: string;
+  profile_picture: string;
+  position: string;
+  body: string;
+};
