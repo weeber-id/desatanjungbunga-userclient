@@ -55,7 +55,7 @@ const Home: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = ({
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
-      <section className="container mx-auto mt-36">
+      <section className="container mx-auto mt-20 md:mt-36">
         <div className="grid lg:grid-cols-2 gap-y-6 items-center md:px-10 px-6 py-8">
           <div>
             <h1 className="text-purple-light text-center lg:text-left md:text-h4 text-h5 font-medium">

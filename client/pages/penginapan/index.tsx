@@ -74,7 +74,9 @@ const PenginapanPage: React.FC<InferGetStaticPropsType<typeof getStaticProps>> =
     <>
       <Header />
       <section className="container mx-auto px-10">
-        <h2 className="text-center font-medium text-h4 lg:text-h2 mt-48 mb-7">Penginapan</h2>
+        <h2 className="text-center text-black font-medium text-h4 lg:text-h2 mt-24 md:mt-48 mb-7">
+          Penginapan
+        </h2>
       </section>
       <section className="container mx-auto mb-16 px-6 lg:px-10">
         <div className="flex items-center">

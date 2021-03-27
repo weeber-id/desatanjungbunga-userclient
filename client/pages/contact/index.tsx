@@ -6,7 +6,7 @@ const ContactPage = () => {
   return (
     <>
       <Header />
-      <h3 className="text-center text-purple md:text-h3 text-h5 mt-48 font-medium mb-11">
+      <h3 className="text-center text-purple md:text-h3 text-h5 mt-28 md:mt-48 font-medium mb-11">
         Hubungi Kami
       </h3>
       <section className="container mx-auto px-6 md:px-10">

@@ -30,6 +30,30 @@
 @tailwind components;
 @tailwind utilities;
 
+@media (max-width: 640px) {
+  h1 {
+    @apply text-h2;
+  }
+  h2 {
+    @apply text-h3;
+  }
+  h3 {
+    @apply text-h4;
+  }
+  h4 {
+    @apply text-h5;
+  }
+  h5 {
+    @apply text-body;
+  }
+  h6 {
+    @apply text-body-sm;
+  }
+  p {
+    @apply text-body-sm;
+  }
+}
+
 .line-clamp-1 {
   display: -webkit-box;
   -webkit-line-clamp: 1;

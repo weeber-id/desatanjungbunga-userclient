@@ -130,7 +130,7 @@ const PenginapanDetailPage: React.FC<InferGetStaticPropsType<typeof getStaticPro
         )}
       </AnimatePresence>
       <Header />
-      <section style={{ paddingTop: 38 * 4 }} className="bg-blue-light mb-16">
+      <section className="bg-blue-light mb-16 pt-20 md:pt-[9.5rem]">
         <div className="container mx-auto px-6 md:px-10 flex justify-end pb-4">
           <BreadCrumb>
             <BreadCrumbItem href="/penginapan">Penginapan</BreadCrumbItem>

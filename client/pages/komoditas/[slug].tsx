@@ -129,7 +129,7 @@ const KomoditasDetailPage: React.FC<InferGetStaticPropsType<typeof getStaticProp
         )}
       </AnimatePresence>
       <Header />
-      <section style={{ paddingTop: 38 * 4 }} className="bg-blue-light mb-16">
+      <section className="bg-blue-light mb-16 pt-20 md:pt-[9.5rem]">
         <div className="container mx-auto px-6 md:px-10 flex justify-end pb-4">
           <BreadCrumb>
             <BreadCrumbItem href="/komoditas">Komoditas</BreadCrumbItem>
