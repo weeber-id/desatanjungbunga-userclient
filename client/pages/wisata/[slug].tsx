@@ -16,7 +16,7 @@ import {
   OpenHour,
   RekomendasiTerdekat,
 } from '../../components';
-import { DayHashMap } from '../../helpers';
+import { DayHashMap, defaultOperationTIme } from '../../helpers';
 import { urlApi } from '../../helpers/urlApi';
 import { Travels } from './index';
 
@@ -70,8 +70,17 @@ const WisataDetailPage: React.FC<InferGetStaticPropsType<typeof getStaticProps>>
 }) => {
   const Router = useRouter();
 
+  if (!initialData?.data) {
+    // eslint-disable-next-line
+    // @ts-ignore
+    initialData = {};
+    // eslint-disable-next-line
+    // @ts-ignore
+    initialData.data = {};
+  }
+
   const { data } = initialData;
-  const { operation_time } = data;
+  const { operation_time = { ...defaultOperationTIme } } = data;
 
   const [openHour, setOpenHour] = useState<boolean>(false);
 

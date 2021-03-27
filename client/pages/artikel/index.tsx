@@ -117,7 +117,7 @@ const ArtikelPage: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = ({
             </>
           )}
           {!isPreviousData &&
-            articles.data.data.map(({ id, slug, title, image_cover }) => (
+            articles.data.data?.map(({ id, slug, title, image_cover }) => (
               <CardImage
                 src={image_cover}
                 width={1600}

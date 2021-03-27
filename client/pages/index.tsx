@@ -295,6 +295,7 @@ const Home: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = ({
               hover
               className="min-w-72 lg:min-w-full lg:w-auto scroll-snap-child-start mr-4 h-full"
               href={`/artikel/${slug}@!@${id}`}
+              alt={title}
             />
           ))}
           <div className="h-full lg:hidden scroll-snap-child-start">
