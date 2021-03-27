@@ -1,5 +1,6 @@
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import { useState } from 'react';
+import Skeleton from 'react-loading-skeleton';
 import { useQuery } from 'react-query';
 import { ApiResponse, Travel } from '../../@types/types';
 import { CardImage, Filter, Footer, Header, Pagination, TextField } from '../../components';
@@ -28,13 +29,13 @@ export const getStaticProps: GetStaticProps<StaticProps> = async () => {
 const WisataPage: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = ({ initialData }) => {
   const [search, setSearch] = useState<string>('');
   const [sort, setSort] = useState<'terbaru' | 'terlama' | 'AtoZ'>();
-  const [searchTrigger, setSearchTrigger] = useState<number>(1);
+  const [searchTrigger, setSearchTrigger] = useState<string>('');
   const [currentPage, setCurrentPage] = useState<number>(1);
 
   const isMedium = useMedia({ query: '(min-width: 768px)' });
   const isSmall = useMedia({ query: '(max-width: 520px)' });
 
-  const { data: travels, isLoading } = useQuery(
+  const { data: travels, isPreviousData } = useQuery(
     ['travels', searchTrigger, sort, currentPage],
     () => {
       const queryParams = [];
@@ -64,7 +65,7 @@ const WisataPage: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = ({ 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    setSearchTrigger(searchTrigger + 1);
+    setSearchTrigger(search);
   };
 
   return (
@@ -100,25 +101,38 @@ const WisataPage: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = ({ 
           }}
           className="grid gap-x-4 lg:gap-x-8 gap-y-10"
         >
-          {travels.data.data?.map((travel) => (
-            <CardImage
-              key={travel.id}
-              src={travel.image || '/'}
-              width={1200}
-              height={900}
-              layout="responsive"
-              text={travel.name}
-              hover
-              className="h-full"
-              href={'/wisata/' + travel.slug + '@!@' + travel.id}
-            />
-          ))}
+          {isPreviousData && (
+            <>
+              <Skeleton height={300} />
+              <Skeleton height={300} />
+              <Skeleton height={300} />
+              <Skeleton height={300} />
+              <Skeleton height={300} />
+              <Skeleton height={300} />
+              <Skeleton height={300} />
+              <Skeleton height={300} />
+            </>
+          )}
+          {!isPreviousData &&
+            travels.data.data?.map((travel) => (
+              <CardImage
+                key={travel.id}
+                src={travel.image || '/'}
+                width={1200}
+                height={900}
+                layout="responsive"
+                text={travel.name}
+                hover
+                className="h-full"
+                href={'/wisata/' + travel.slug + '@!@' + travel.id}
+              />
+            ))}
         </div>
       </section>
       <section className="container mx-auto mb-16 px-10">
         <div className="flex justify-center">
           <Pagination
-            isDisabled={isLoading}
+            isDisabled={isPreviousData}
             onChange={(currentPage) => setCurrentPage(currentPage)}
             maxPage={travels.data.max_page}
           />
