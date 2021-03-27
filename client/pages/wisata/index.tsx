@@ -72,7 +72,9 @@ const WisataPage: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = ({ 
     <>
       <Header />
       <section className="container mx-auto px-10">
-        <h2 className="text-center font-medium lg:text-h2 text-h4 mt-48 mb-7">Wisata</h2>
+        <h2 className="text-center text-black font-medium lg:text-h2 text-h4 mt-24 md:mt-48 mb-7">
+          Wisata
+        </h2>
       </section>
       <section className="container mx-auto mb-16 px-6 lg:px-10">
         <div className="flex items-center">

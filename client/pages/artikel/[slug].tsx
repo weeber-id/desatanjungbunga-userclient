@@ -75,7 +75,7 @@ const ArtikelDetailPage: React.FC<InferGetStaticPropsType<typeof getStaticProps>
   return (
     <>
       <Header />
-      <section style={{ paddingTop: 38 * 4 }} className="bg-blue-light mb-16">
+      <section className="bg-blue-light mb-16 pt-20 md:pt-[9.5rem]">
         <div className="container mx-auto px-6 md:px-10 flex justify-end pb-4">
           <BreadCrumb>
             <BreadCrumbItem href="/artikel">Artikel</BreadCrumbItem>
@@ -84,12 +84,14 @@ const ArtikelDetailPage: React.FC<InferGetStaticPropsType<typeof getStaticProps>
         </div>
       </section>
       <section className="container mx-auto px-6 md:px-10 mb-16 max-w-[800px]">
-        <h1 className="text-h2 font-bold mb-3">{title}</h1>
+        <h1 className="lg:text-h2 md:text-h4 text-h5 font-bold mb-3">{title}</h1>
         <div className="flex items-center mb-3">
           <img className="h-12 w-12 rounded-full mr-2.5" src={ImgNoAvatar} alt={author} />
           <div>
-            <h4 className="text-body text-black">oleh {author}</h4>
-            <h6 className="text-body text-red"> {dayjs(created_at).format('D MMMM YYYY')}</h6>
+            <h4 className="md:text-body text-body-sm text-black">oleh {author}</h4>
+            <h6 className="md:text-body text-body-sm text-red">
+              {dayjs(created_at).format('D MMMM YYYY')}
+            </h6>
           </div>
         </div>
         <img src={image_cover} alt="" className="w-full h-auto mb-9" />

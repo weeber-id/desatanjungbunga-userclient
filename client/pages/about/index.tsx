@@ -56,7 +56,7 @@ const AboutPage = () => {
   return (
     <>
       <Header />
-      <h3 className="text-center md:text-h3 text-h5 text-black mt-48 font-medium mb-11">
+      <h3 className="text-center md:text-h3 text-h5 text-black mt-28 md:mt-48 font-medium mb-11">
         Profil Desa Tanjung Bunga
       </h3>
       <nav
