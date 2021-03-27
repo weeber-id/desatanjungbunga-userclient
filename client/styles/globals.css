@@ -99,3 +99,16 @@
 .ic-black path {
   fill: #393b3d;
 }
+
+#nprogress .bar {
+  background: #364294 !important;
+}
+
+#nprogress .peg {
+  box-shadow: 0 0 10px #364294, 0 0 5px #364294;
+}
+
+#nprogress .spinner-icon {
+  border-top-color: #364294;
+  border-left-color: #364294;
+}

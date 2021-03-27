@@ -1,5 +1,6 @@
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import { useState } from 'react';
+import Skeleton from 'react-loading-skeleton';
 import { useQuery } from 'react-query';
 import { ApiResponse, Article } from '../../@types/types';
 import { CardImage, Filter, Footer, Header, Pagination, TextField } from '../../components';
@@ -28,13 +29,13 @@ export const getStaticProps: GetStaticProps<StaticProps> = async () => {
 const ArtikelPage: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = ({ initialData }) => {
   const [search, setSearch] = useState<string>('');
   const [sort, setSort] = useState<'terbaru' | 'terlama' | 'AtoZ'>();
-  const [searchTrigger, setSearchTrigger] = useState<number>(1);
+  const [searchTrigger, setSearchTrigger] = useState<string>('');
   const [currentPage, setCurrentPage] = useState(1);
 
   const isMedium = useMedia({ query: '(min-width: 768px)' });
   const isSmall = useMedia({ query: '(max-width: 520px)' });
 
-  const { data: articles } = useQuery(
+  const { data: articles, isPreviousData } = useQuery(
     ['articles', searchTrigger, sort, currentPage],
     () => {
       const queryParams = [];
@@ -64,7 +65,7 @@ const ArtikelPage: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = ({
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    setSearchTrigger(searchTrigger + 1);
+    setSearchTrigger(search);
   };
 
   return (
@@ -101,24 +102,38 @@ const ArtikelPage: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = ({
           }}
           className="grid gap-x-12 gap-y-10"
         >
-          {articles.data.data.map(({ id, slug, title, image_cover }) => (
-            <CardImage
-              src={image_cover}
-              width={1600}
-              height={900}
-              layout="responsive"
-              text={title}
-              hover
-              key={id}
-              href={`/artikel/${slug}@!@${id}`}
-              className="h-full"
-            />
-          ))}
+          {isPreviousData && (
+            <>
+              <Skeleton height={300} />
+              <Skeleton height={300} />
+              <Skeleton height={300} />
+              <Skeleton height={300} />
+              <Skeleton height={300} />
+              <Skeleton height={300} />
+              <Skeleton height={300} />
+              <Skeleton height={300} />
+            </>
+          )}
+          {!isPreviousData &&
+            articles.data.data.map(({ id, slug, title, image_cover }) => (
+              <CardImage
+                src={image_cover}
+                width={1600}
+                height={900}
+                layout="responsive"
+                text={title}
+                hover
+                key={id}
+                href={`/artikel/${slug}@!@${id}`}
+                className="h-full"
+              />
+            ))}
         </div>
       </section>
       <section className="container mx-auto mb-16 px-10">
         <div className="flex justify-center">
           <Pagination
+            isDisabled={isPreviousData}
             maxPage={initialData.data.max_page}
             onChange={(currentPage) => setCurrentPage(currentPage)}
           />
