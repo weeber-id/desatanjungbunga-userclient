@@ -11,7 +11,7 @@ module.exports = {
       sans: ["'Roboto'", 'sans-serif'],
     },
     fontSize: {
-      h1: ['3,433125rem', '4rem'],
+      h1: ['3.433125rem', '4rem'],
       h2: ['2.746875rem', '3.875rem'],
       h3: ['2.1975rem', '2.875rem'],
       h4: ['1.758125rem', '2.3125rem'],

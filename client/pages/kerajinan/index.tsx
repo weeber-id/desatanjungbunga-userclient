@@ -1,6 +1,7 @@
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import Head from 'next/head';
 import { useState } from 'react';
+import Skeleton from 'react-loading-skeleton';
 import { useQuery } from 'react-query';
 import { ApiResponse, HandCraft } from '../../@types/types';
 import { CardImage, Filter, Footer, Header, Pagination, TextField } from '../../components';
@@ -31,13 +32,13 @@ const KerajinanPage: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = 
 }) => {
   const [search, setSearch] = useState<string>('');
   const [sort, setSort] = useState<'terbaru' | 'terlama' | 'AtoZ'>();
-  const [searchTrigger, setSearchTrigger] = useState<number>(1);
+  const [searchTrigger, setSearchTrigger] = useState<string>('');
   const [currentPage, setCurrentPage] = useState(1);
 
   const isMedium = useMedia({ query: '(min-width: 768px)' });
   const isSmall = useMedia({ query: '(max-width: 520px)' });
 
-  const { data: handcrafts } = useQuery(
+  const { data: handcrafts, isPreviousData } = useQuery(
     ['handcrafts', searchTrigger, sort, currentPage],
     () => {
       const queryParams = [];
@@ -67,7 +68,7 @@ const KerajinanPage: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    setSearchTrigger(searchTrigger + 1);
+    setSearchTrigger(search);
   };
 
   return (
@@ -81,7 +82,9 @@ const KerajinanPage: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = 
       </Head>
       <Header />
       <section className="container mx-auto px-10">
-        <h2 className="text-center font-medium text-h4 lg:text-h2 mt-48 mb-7">Kerajinan</h2>
+        <h2 className="text-center text-black font-medium text-h4 lg:text-h2 mt-24 md:mt-48 mb-7">
+          Kerajinan
+        </h2>
       </section>
       <section className="container mx-auto mb-16 px-6 lg:px-10">
         <div className="flex items-center">
@@ -110,24 +113,41 @@ const KerajinanPage: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = 
           }}
           className="grid gap-x-4 lg:gap-x-8 gap-y-10"
         >
-          {handcrafts.data.data?.map(({ image, id, slug, name }) => (
-            <CardImage
-              key={id}
-              src={image || '/'}
-              width={1200}
-              height={900}
-              layout="responsive"
-              text={name}
-              hover
-              className="h-full"
-              href={`/kerajinan/${slug}@!@${id}`}
-            />
-          ))}
+          {isPreviousData && (
+            <>
+              <Skeleton height={300} />
+              <Skeleton height={300} />
+              <Skeleton height={300} />
+              <Skeleton height={300} />
+              <Skeleton height={300} />
+              <Skeleton height={300} />
+              <Skeleton height={300} />
+              <Skeleton height={300} />
+            </>
+          )}
+          {!isPreviousData &&
+            handcrafts.data.data?.map(({ image, id, slug, name }) => (
+              <CardImage
+                key={id}
+                src={image || '/'}
+                width={1200}
+                height={900}
+                layout="responsive"
+                text={name}
+                hover
+                className="h-full"
+                href={`/kerajinan/${slug}@!@${id}`}
+              />
+            ))}
         </div>
       </section>
       <section className="container mx-auto mb-16 px-10">
         <div className="flex justify-center">
-          <Pagination onChange={(cp) => setCurrentPage(cp)} maxPage={handcrafts.data.max_page} />
+          <Pagination
+            isDisabled={isPreviousData}
+            onChange={(cp) => setCurrentPage(cp)}
+            maxPage={handcrafts.data.max_page}
+          />
         </div>
       </section>
       <Footer />

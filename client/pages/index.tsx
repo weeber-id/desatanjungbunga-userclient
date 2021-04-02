@@ -1,36 +1,40 @@
-import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import classNames from 'classnames';
+import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
 import { useState } from 'react';
 import { Travel } from '../@types/types';
-import { DummyWisata } from '../assets';
 import { Button, CardImage, Footer, Header } from '../components';
 import { urlApi } from '../helpers/urlApi';
-import { Travels } from './wisata';
-import { Commodities } from './komoditas';
+import { Articles } from './artikel';
 import { HandCrafts } from './kerajinan';
+import { Commodities } from './komoditas';
+import { Travels } from './wisata';
 
 interface StaticProps {
   travels: Travels;
   commodities: Commodities;
   handcrafts: HandCrafts;
+  articles: Articles;
 }
 
 export const getStaticProps: GetStaticProps<StaticProps> = async () => {
   const resTravels = await fetch(urlApi + '/travels?content_per_page=4&page=1');
   const resCommodities = await fetch(urlApi + '/culinaries?content_per_page=3&page=1');
   const resHandcrafts = await fetch(urlApi + '/handcrafts?content_per_page=4&page=1');
+  const resArticles = await fetch(urlApi + '/articles?content_per_page=4&page=1');
 
   const travels: Travels = await resTravels.json();
   const commodities: Commodities = await resCommodities.json();
   const handcrafts: HandCrafts = await resHandcrafts.json();
+  const articles: Articles = await resArticles.json();
 
   return {
     props: {
       travels,
       commodities,
       handcrafts,
+      articles,
     },
     revalidate: 1,
   };
@@ -40,6 +44,7 @@ const Home: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = ({
   travels,
   commodities,
   handcrafts,
+  articles,
 }) => {
   const [activeTravel, setActiveTravel] = useState<Travel>(travels.data.data[0]);
 
@@ -50,7 +55,7 @@ const Home: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = ({
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
-      <section className="container mx-auto mt-36">
+      <section className="container mx-auto mt-20 md:mt-36">
         <div className="grid lg:grid-cols-2 gap-y-6 items-center md:px-10 px-6 py-8">
           <div>
             <h1 className="text-purple-light text-center lg:text-left md:text-h4 text-h5 font-medium">
@@ -63,7 +68,7 @@ const Home: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = ({
               <Button bold className="mr-6 h-12 w-36">
                 Jelajahi
               </Button>
-              <Button bold className="h-12 w-36" variant="outlined" color="red">
+              <Button href="/artikel" bold className="h-12 w-36" variant="outlined" color="red">
                 Artikel
               </Button>
             </div>
@@ -259,6 +264,7 @@ const Home: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = ({
                 hover
                 href={`/kerajinan/${slug}@!@${id}`}
                 alt={name}
+                className="h-full"
               />
             ))}
           </div>
@@ -267,7 +273,7 @@ const Home: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = ({
       <section className="container lg:px-10 mx-auto py-11">
         <h2 className="lg:text-h2 text-h4 text-center text-black font-medium mb-3">Artikel</h2>
         <div className="flex justify-center">
-          <Button variant="outlined" color="red">
+          <Button href="/artikel" variant="outlined" color="red">
             Lihat lebih lengkap
           </Button>
         </div>
@@ -278,42 +284,20 @@ const Home: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = ({
           <div className="h-full lg:hidden scroll-snap-child-start">
             <div className="w-6 lg:w-0 h-4"></div>
           </div>
-          <CardImage
-            src={DummyWisata}
-            width={1200}
-            height={900}
-            layout="responsive"
-            text="Visit Tanjung Bunga"
-            hover
-            className="min-w-72 lg:min-w-full lg:w-auto scroll-snap-child-start"
-          />
-          <CardImage
-            src={DummyWisata}
-            width={1200}
-            height={900}
-            layout="responsive"
-            text="Visit Tanjung Bunga"
-            hover
-            className="min-w-72 lg:min-w-full lg:w-auto ml-4 lg:ml-0 scroll-snap-child-start"
-          />
-          <CardImage
-            src={DummyWisata}
-            width={1200}
-            height={900}
-            layout="responsive"
-            text="Visit Tanjung Bunga"
-            hover
-            className="min-w-72 lg:min-w-full lg:w-auto ml-4 lg:ml-0 scroll-snap-child-start"
-          />
-          <CardImage
-            src={DummyWisata}
-            width={1200}
-            height={900}
-            layout="responsive"
-            text="Visit Tanjung Bunga Visit Tanjung Bunga Visit Tanjung Bunga Visit Tanjung Bunga"
-            hover
-            className="min-w-72 lg:min-w-full lg:w-auto ml-4 lg:ml-0 scroll-snap-child-start"
-          />
+          {articles.data.data.map(({ id, title, image_cover, slug }) => (
+            <CardImage
+              key={id}
+              src={image_cover}
+              width={1600}
+              height={900}
+              layout="responsive"
+              text={title}
+              hover
+              className="min-w-72 lg:min-w-full lg:w-auto scroll-snap-child-start mr-4 h-full"
+              href={`/artikel/${slug}@!@${id}`}
+              alt={title}
+            />
+          ))}
           <div className="h-full lg:hidden scroll-snap-child-start">
             <div className="w-6 lg:w-0 h-4"></div>
           </div>

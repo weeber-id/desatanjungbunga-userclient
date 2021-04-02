@@ -1,12 +1,31 @@
+import classNames from 'classnames';
+import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
-import classNames from 'classnames';
-import Dosen from '../../json/dosen.json';
 import { MutableRefObject, useEffect, useRef, useState } from 'react';
-import { DummyOrang } from '../../assets';
+import { About } from '../../@types/types';
 import { CardDosenPeneliti, Footer, Header } from '../../components';
+import { urlApi } from '../../helpers';
+import Dosen from '../../json/dosen.json';
 
-const AboutPage = () => {
+interface StaticProps {
+  initialData: About;
+}
+
+export const getStaticProps: GetStaticProps<StaticProps> = async () => {
+  const res = await fetch(urlApi + '/about');
+
+  const data = await res.json();
+
+  return {
+    props: {
+      initialData: data.data,
+    },
+    revalidate: 1,
+  };
+};
+
+const AboutPage: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = ({ initialData }) => {
   const [active, setActive] = useState<number>(0);
   const [sticky, setSticky] = useState<boolean>(false);
   const sejarahRef = useRef<HTMLElement>();
@@ -56,7 +75,7 @@ const AboutPage = () => {
   return (
     <>
       <Header />
-      <h3 className="text-center md:text-h3 text-h5 text-black mt-48 font-medium mb-11">
+      <h3 className="text-center md:text-h3 text-h5 text-black mt-28 md:mt-48 font-medium mb-11">
         Profil Desa Tanjung Bunga
       </h3>
       <nav
@@ -186,26 +205,21 @@ const AboutPage = () => {
         </h4>
         <div className="grid grid-cols-1 md:grid-cols-5 md:w-3/4 mx-auto gap-6">
           <div className="md:col-span-2 w-3/4 md:w-full mx-auto">
-            <Image layout="responsive" src={DummyOrang} height={1200} width={900} />
+            <Image
+              layout="responsive"
+              src={initialData.profile_picture || '/'}
+              height={800}
+              width={600}
+            />
           </div>
           <div className="md:col-span-3">
             <h5 className="md:text-h5 text-body text-center md:text-left font-medium text-black mb-2">
-              Dr. Suparman
+              {initialData.name}
             </h5>
             <h6 className="md:text-body text-body-sm md:text-left text-center md:text-purple text-red mb-6">
-              Ketua Desa Tanjung Bunga
+              {initialData.position}
             </h6>
-            <p className="text-black md:text-body text-body-sm">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris lacinia odio at
-              sagittis iaculis. Nullam tortor nibh, vestibulum at aliquam in, volutpat ac erat. Sed
-              dapibus eros at nisi pretium, non gravida odio porta. Lorem ipsum dolor sit amet,
-              consectetur adipiscing elit. Phasellus sit amet eros ipsum. Morbi malesuada auctor
-              velit quis vulputate. Mauris vel eros tincidunt, tincidunt libero vitae, consequat
-              nulla. Etiam porttitor auctor diam, porta congue mi rutrum tristique. Sed nec nisl sed
-              sem dignissim varius. Nunc venenatis, purus vel volutpat laoreet, enim libero pharetra
-              turpis, id eleifend metus quam vel libero. Class aptent taciti sociosqu ad litora
-              torquent per conubia nostra, per inceptos himenaeos.
-            </p>
+            <p className="text-black md:text-body text-body-sm">{initialData.body}</p>
           </div>
         </div>
       </section>

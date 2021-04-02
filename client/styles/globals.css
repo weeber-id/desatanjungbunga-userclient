@@ -2,8 +2,57 @@
 @import url('./loader.css');
 
 @tailwind base;
+
+@layer base {
+  h1 {
+    @apply text-h1;
+  }
+  h2 {
+    @apply text-h2;
+  }
+  h3 {
+    @apply text-h3;
+  }
+  h4 {
+    @apply text-h4;
+  }
+  h5 {
+    @apply text-h5;
+  }
+  h6 {
+    @apply text-body;
+  }
+  p {
+    @apply text-body;
+  }
+}
+
 @tailwind components;
 @tailwind utilities;
+
+@media (max-width: 640px) {
+  h1 {
+    @apply text-h2;
+  }
+  h2 {
+    @apply text-h3;
+  }
+  h3 {
+    @apply text-h4;
+  }
+  h4 {
+    @apply text-h5;
+  }
+  h5 {
+    @apply text-body;
+  }
+  h6 {
+    @apply text-body-sm;
+  }
+  p {
+    @apply text-body-sm;
+  }
+}
 
 .line-clamp-1 {
   display: -webkit-box;
@@ -73,4 +122,17 @@
 
 .ic-black path {
   fill: #393b3d;
+}
+
+#nprogress .bar {
+  background: #364294 !important;
+}
+
+#nprogress .peg {
+  box-shadow: 0 0 10px #364294, 0 0 5px #364294;
+}
+
+#nprogress .spinner-icon {
+  border-top-color: #364294;
+  border-left-color: #364294;
 }

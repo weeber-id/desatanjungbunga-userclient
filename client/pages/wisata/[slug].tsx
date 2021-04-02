@@ -17,7 +17,7 @@ import {
   OpenHour,
   RekomendasiTerdekat,
 } from '../../components';
-import { DayHashMap } from '../../helpers';
+import { DayHashMap, defaultOperationTIme } from '../../helpers';
 import { urlApi } from '../../helpers/urlApi';
 import { Travels } from './index';
 
@@ -71,8 +71,17 @@ const WisataDetailPage: React.FC<InferGetStaticPropsType<typeof getStaticProps>>
 }) => {
   const Router = useRouter();
 
+  if (!initialData?.data) {
+    // eslint-disable-next-line
+    // @ts-ignore
+    initialData = {};
+    // eslint-disable-next-line
+    // @ts-ignore
+    initialData.data = {};
+  }
+
   const { data } = initialData;
-  const { operation_time } = data;
+  const { operation_time = { ...defaultOperationTIme } } = data;
 
   const [openHour, setOpenHour] = useState<boolean>(false);
 
@@ -108,7 +117,7 @@ const WisataDetailPage: React.FC<InferGetStaticPropsType<typeof getStaticProps>>
         />
       )}
       <Header />
-      <section style={{ paddingTop: 38 * 4 }} className="bg-blue-light mb-16">
+      <section className="bg-blue-light mb-16 pt-20 md:pt-[9.5rem]">
         <div className="container mx-auto px-6 md:px-10 flex justify-end pb-4">
           <BreadCrumb>
             <BreadCrumbItem href="/wisata">Wisata</BreadCrumbItem>
