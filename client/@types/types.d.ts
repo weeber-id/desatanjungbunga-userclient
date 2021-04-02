@@ -123,6 +123,10 @@ export type Article = {
   updated_at: string;
   active: boolean;
   image_cover: string;
+  author_detail: {
+    id: string;
+    profile_picture: string;
+  };
 };
 
 export type About = {

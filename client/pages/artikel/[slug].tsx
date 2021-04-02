@@ -69,7 +69,7 @@ const ArtikelDetailPage: React.FC<InferGetStaticPropsType<typeof getStaticProps>
     initialData.data = {};
   }
 
-  const { author, created_at, body, image_cover, title } = initialData.data;
+  const { author, created_at, body, image_cover, title, author_detail } = initialData.data;
 
   if (Router.isFallback) return <LoadingPage />;
   return (
@@ -86,7 +86,11 @@ const ArtikelDetailPage: React.FC<InferGetStaticPropsType<typeof getStaticProps>
       <section className="container mx-auto px-6 md:px-10 mb-16 max-w-[800px]">
         <h1 className="lg:text-h2 md:text-h4 text-h5 font-bold mb-3">{title}</h1>
         <div className="flex items-center mb-3">
-          <img className="h-12 w-12 rounded-full mr-2.5" src={ImgNoAvatar} alt={author} />
+          <img
+            className="h-12 w-12 rounded-full mr-2.5"
+            src={author_detail.profile_picture || ImgNoAvatar}
+            alt={author}
+          />
           <div>
             <h4 className="md:text-body text-body-sm text-black">oleh {author}</h4>
             <h6 className="md:text-body text-body-sm text-red">
