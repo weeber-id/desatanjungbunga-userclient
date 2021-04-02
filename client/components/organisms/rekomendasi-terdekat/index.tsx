@@ -1,10 +1,15 @@
 import classNames from 'classnames';
 import { motion } from 'framer-motion';
-import { useState } from 'react';
-import { DummyWisata } from '../../../assets';
+import React, { useState } from 'react';
+import { Commodity, Lodging } from '../../../@types/types';
 import { CardImage } from '../../mollecules';
 
-const RekomendasiTerdekat = () => {
+interface Props {
+  culinary_details?: Commodity[];
+  lodging_details?: Lodging[];
+}
+
+const RekomendasiTerdekat: React.FC<Props> = ({ culinary_details, lodging_details }) => {
   const [active, setActive] = useState<'penginapan' | 'kuliner'>('penginapan');
 
   return (
@@ -46,42 +51,46 @@ const RekomendasiTerdekat = () => {
         </div>
         {active === 'penginapan' ? (
           <>
-            {[9, 5, 6, 7].map((val, i) => (
+            {culinary_details?.map(({ id, name, image, slug }, i) => (
               <motion.div
                 initial={{ y: 100, opacity: 0 }}
                 transition={{ duration: 0.5, delay: i * 0.05 }}
                 animate={{ y: 0, opacity: 1 }}
-                key={val}
+                key={id}
                 className="min-w-72 lg:min-w-auto scroll-snap-child-start mr-4"
               >
                 <CardImage
-                  src={DummyWisata}
+                  src={image}
                   width={1200}
                   height={900}
                   layout="responsive"
-                  text="Visit Tanjung Bunga"
+                  text={name}
                   hover
+                  href={`/komoditas/${slug}@!@${id}`}
+                  alt={name}
                 />
               </motion.div>
             ))}
           </>
         ) : (
           <>
-            {[1, 2, 3, 4].map((val, i) => (
+            {lodging_details?.map(({ id, name, image, slug }, i) => (
               <motion.div
                 initial={{ y: 100, opacity: 0 }}
                 transition={{ duration: 0.5, delay: i * 0.05 }}
                 animate={{ y: 0, opacity: 1 }}
-                key={val}
+                key={id}
                 className="min-w-72 lg:min-w-auto scroll-snap-child-start mr-4"
               >
                 <CardImage
-                  src={DummyWisata}
+                  src={image}
                   width={1200}
                   height={900}
                   layout="responsive"
-                  text="Ketoprak Gingseng"
+                  text={name}
                   hover
+                  alt={name}
+                  href={`/penginapan/${slug}@!@${id}`}
                 />
               </motion.div>
             ))}

@@ -168,32 +168,19 @@ const AboutPage: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = ({ i
           />
         </div>
         <p className="md:text-body text-body-sm text-black">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris lacinia odio at sagittis
-          iaculis. Nullam tortor nibh, vestibulum at aliquam in, volutpat ac erat. Sed dapibus eros
-          at nisi pretium, non gravida odio porta. Lorem ipsum dolor sit amet, consectetur
-          adipiscing elit. Phasellus sit amet eros ipsum. Morbi malesuada auctor velit quis
-          vulputate. Mauris vel eros tincidunt, tincidunt libero vitae, consequat nulla. Etiam
-          porttitor auctor diam, porta congue mi rutrum tristique. Sed nec nisl sed sem dignissim
-          varius. Nunc venenatis, purus vel volutpat laoreet, enim libero pharetra turpis, id
-          eleifend metus quam vel libero. Class aptent taciti sociosqu ad litora torquent per
-          conubia nostra, per inceptos himenaeos. Enim libero pharetra turpis. Lorem ipsum dolor sit
-          amet, consectetur adipiscing elit. Mauris lacinia odio at sagittis iaculis. Nullam tortor
-          nibh, vestibulum at aliquam in, volutpat ac erat. Sed dapibus eros at nisi pretium, non
-          gravida odio porta. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sit
-          amet eros ipsum. Morbi malesuada auctor velit quis vulputate. Mauris vel eros tincidunt,
-          tincidunt libero vitae, consequat nulla. Etiam porttitor auctor diam, porta congue mi
-          rutrum tristique. Sed nec nisl sed sem dignissim varius. Nunc venenatis, purus vel
-          volutpat laoreet, enim libero pharetra turpis, id eleifend metus quam vel libero. Class
-          aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris lacinia odio at sagittis
-          iaculis. Nullam tortor nibh, vestibulum at aliquam in, volutpat ac erat. Sed dapibus eros
-          at nisi pretium, non gravida odio porta. Lorem ipsum dolor sit amet, consectetur
-          adipiscing elit. Phasellus sit amet eros ipsum. Morbi malesuada auctor velit quis
-          vulputate. Mauris vel eros tincidunt, tincidunt libero vitae, consequat nulla. Etiam
-          porttitor auctor diam, porta congue mi rutrum tristique. Sed nec nisl sed sem dignissim
-          varius. Nunc venenatis, purus vel volutpat laoreet, enim libero pharetra turpis, id
-          eleifend metus quam vel libero. Class aptent taciti sociosqu ad litora torquent per
-          conubia nostra, per inceptos himenaeos.
+          Sekitar tahun 1938, Desa Tanjung Bunga pada awalnya adalah wilayah kenegerian Pangururan
+          yang dipimpin oleh Kepala Nagari (Nagari). Setelah berakhirnya masa penjajahan pada tahun
+          1945, sistem Pemerintahan Kenegerian itu berubah menjadi sistem Pemerintahan Negara
+          Kesatuan Republik Indonesia, di bawah Kecamatan yang disebut Pemerintahan Desa yang
+          dipimpin oleh satu orang Kepala Desa. <br /> <br /> Terdapat berbagai jenis satwa khas di
+          Desa Tanjung Bunga. Beragam jenis burung, dan kupu - kupu. Desa Tanjung Bunga juga
+          ditemukan satwa herpetofauna. Herpetofauna merupakan hewan yang terdiri dari 2 kelompok
+          besar yaitu amfibi dan reptil. <br /> <br /> Selain itu keberadaannya yang terletak di
+          Kabupaten Samosir tentunya membuat desa ini menjadi dekat dengan danau vulkanik terbesar
+          di Indonesia yaitu Danau Toba. Selain potensi wisata, desa ini juga terdapat berbagai
+          jenis hasil bumi. Durian, aren, kelapa, jeruk, alpukat, dan nangka hanyalah sedikit dari
+          banyak jenis buah-buahan yang dapat ditemui di desa ini. Tak lupa, kerajinan Ulos yang
+          sangat indah juga berasal dari desa ini.
         </p>
       </section>
       <section
