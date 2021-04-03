@@ -164,11 +164,14 @@ const WisataDetailPage: React.FC<InferGetStaticPropsType<typeof getStaticProps>>
             <p className="text-body-sm md:text-body text-black mb-11 md:mb-16">
               {data.short_description}
             </p>
-            <InfoDetail description={data.description} />
+            <InfoDetail content_id={data.id} content_name="travel" description={data.description} />
           </div>
         </div>
       </section>
-      <RekomendasiTerdekat />
+      <RekomendasiTerdekat
+        culinary_details={data.culinary_details}
+        lodging_details={data.lodging_details}
+      />
       <Footer />
     </>
   );

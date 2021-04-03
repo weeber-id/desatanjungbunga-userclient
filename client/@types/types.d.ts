@@ -20,6 +20,8 @@ export type Travel = BaseElement & {
   updatedAt: string;
   price: string;
   operation_time: OperationTimeState;
+  culinary_details?: Commodity[];
+  lodging_details?: Lodging[];
 };
 
 export type Lodging = BaseElement & {
@@ -121,6 +123,10 @@ export type Article = {
   updated_at: string;
   active: boolean;
   image_cover: string;
+  author_detail: {
+    id: string;
+    profile_picture: string;
+  };
 };
 
 export type About = {
