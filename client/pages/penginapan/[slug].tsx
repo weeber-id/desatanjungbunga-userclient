@@ -1,4 +1,3 @@
-import { data } from 'autoprefixer';
 import dayjs from 'dayjs';
 import { AnimatePresence } from 'framer-motion';
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next';
@@ -50,8 +49,6 @@ export const getStaticProps: GetStaticProps<StaticProps> = async ({ params }) =>
   const res = await fetch(urlApi + `/lodging?id=${id}&slug=${slug}`);
 
   const initialData: ApiResponse<Lodging> = await res.json();
-
-  console.log(initialData.meta);
 
   if (initialData.meta.code === 404) {
     return {

@@ -127,6 +127,13 @@ export type Article = {
     id: string;
     profile_picture: string;
   };
+  related_details: {
+    source: 'article' | 'travel' | 'culinary' | 'handcraft' | 'lodging';
+    id: string;
+    slug: string;
+    title: string;
+    image_cover: string;
+  }[];
 };
 
 export type About = {
