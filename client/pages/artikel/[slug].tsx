@@ -1,5 +1,6 @@
 import dayjs from 'dayjs';
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next';
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { Articles } from '.';
 import { ApiResponse, Article } from '../../@types/types';
@@ -74,6 +75,21 @@ const ArtikelDetailPage: React.FC<InferGetStaticPropsType<typeof getStaticProps>
   if (Router.isFallback) return <LoadingPage />;
   return (
     <>
+      <Head>
+        <title>{title}</title>
+        <meta property="og:site_name" content="Wisata Samosir" />
+        <meta property="og:title" content={title} />
+        <meta property="og:type" content="article" />
+        <meta
+          name="keywords"
+          content="Wisata Samosir, wisata ke sumatera utara, pulau samosir, danau toba, desa tanjung bunga"
+        />
+        <meta name="image" content={image_cover} />
+        <meta name="author" content={author} />
+        <meta property="article:published_time" content={created_at} />
+        <meta name="description" content={body} />
+        <meta name="robots" content="index, follow" />
+      </Head>
       <Header />
       <section className="bg-blue-light mb-16 pt-20 md:pt-[9.5rem]">
         <div className="container mx-auto px-6 md:px-10 flex justify-end pb-4">
@@ -98,7 +114,7 @@ const ArtikelDetailPage: React.FC<InferGetStaticPropsType<typeof getStaticProps>
             </h6>
           </div>
         </div>
-        <img src={image_cover} alt="" className="w-full h-auto mb-9" />
+        <img src={image_cover} alt={title} className="w-full h-auto mb-9" />
         <div dangerouslySetInnerHTML={{ __html: body }}></div>
       </section>
     </>

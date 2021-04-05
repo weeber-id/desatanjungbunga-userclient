@@ -118,7 +118,16 @@ const KerajinanDetailPage: React.FC<InferGetStaticPropsType<typeof getStaticProp
     <>
       <Head>
         <title>Kerajinan | {name}</title>
+        <meta property="og:site_name" content="Wisata Samosir" />
+        <meta property="og:type" content="article" />
+        <meta property="og:title" content={name} />
+        <meta property="og:image" content={image} />
         <meta name="description" content={short_description} />
+        <meta name="robots" content="index, follow" />
+        <meta
+          name="keywords"
+          content="Wisata Samosir, kerajinan khas sumatera utara, kerajinan di pulau samosir, kerajinan di danau toba, kerajinan khas desa tanjung bunga"
+        />
       </Head>
       <AnimatePresence exitBeforeEnter>
         {openHour && (

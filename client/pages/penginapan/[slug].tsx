@@ -124,7 +124,16 @@ const PenginapanDetailPage: React.FC<InferGetStaticPropsType<typeof getStaticPro
     <>
       <Head>
         <title>Penginapan | {name}</title>
+        <meta property="og:site_name" content="Wisata Samosir" />
+        <meta property="og:type" content="article" />
+        <meta property="og:title" content={name} />
+        <meta property="og:image" content={image} />
         <meta name="description" content={short_description} />
+        <meta name="robots" content="index, follow" />
+        <meta
+          name="keywords"
+          content="Wisata Samosir, akomodasi wisata di pulau samosir, penginapan di pulau samosir, booking penginapan di danau toba, penginapan di desa tanjung bunga"
+        />
       </Head>
       <AnimatePresence exitBeforeEnter>
         {openHour && (
