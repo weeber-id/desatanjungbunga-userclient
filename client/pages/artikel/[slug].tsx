@@ -5,8 +5,9 @@ import { useRouter } from 'next/router';
 import { Articles } from '.';
 import { ApiResponse, Article } from '../../@types/types';
 import { ImgNoAvatar } from '../../assets';
-import { BreadCrumb, BreadCrumbItem, Header, LoadingPage } from '../../components';
+import { BreadCrumb, BreadCrumbItem, CardImage, Header, LoadingPage } from '../../components';
 import { urlApi } from '../../helpers';
+import { useMedia } from '../../hooks/useMedia';
 
 interface StaticProps {
   initialData: ApiResponse<Article>;
@@ -70,7 +71,17 @@ const ArtikelDetailPage: React.FC<InferGetStaticPropsType<typeof getStaticProps>
     initialData.data = {};
   }
 
-  const { author, created_at, body, image_cover, title, author_detail } = initialData.data;
+  const {
+    author,
+    created_at,
+    body,
+    image_cover,
+    title,
+    author_detail,
+    related_details,
+  } = initialData.data;
+
+  const isMobile = useMedia({ query: '(max-width: 768px)' });
 
   if (Router.isFallback) return <LoadingPage />;
   return (
@@ -116,6 +127,76 @@ const ArtikelDetailPage: React.FC<InferGetStaticPropsType<typeof getStaticProps>
         </div>
         <img src={image_cover} alt={title} className="w-full h-auto mb-9" />
         <div dangerouslySetInnerHTML={{ __html: body }}></div>
+      </section>
+      <section className="border-t border-black py-6 container mx-auto">
+        <h5 className="md:text-h5 md:px-0 px-6 text-body text-black font-bold mb-8 md:mt-9 mt-6">
+          Hal yang terkait dengan artikel ini
+        </h5>
+        {isMobile && (
+          <div
+            style={{ scrollPadding: '0 24px' }}
+            className="flex flex-nowrap overflow-y-auto scroll-snap-x-container hidden-scrollbar"
+          >
+            <div className="h-full scroll-snap-child-start">
+              <div className="w-6 h-4"></div>
+            </div>
+            {related_details?.map(({ id, slug, title, source, image_cover }) => {
+              const map = {
+                article: 'artikel',
+                culinary: 'komoditas',
+                handcraft: 'kerajinan',
+                lodging: 'penginapan',
+                travel: 'wisata',
+              };
+
+              return (
+                <CardImage
+                  key={id}
+                  href={`/${map[source]}/${slug}@!@${id}`}
+                  text={title}
+                  alt={title}
+                  width={source === 'article' ? 1600 : 1200}
+                  height={900}
+                  layout="responsive"
+                  hover
+                  src={image_cover || '/'}
+                  className="min-w-72 lg:min-w-full lg:w-auto scroll-snap-child-start mr-4 h-full"
+                />
+              );
+            })}
+            <div className="h-full scroll-snap-child-start">
+              <div className="w-6 h-4"></div>
+            </div>
+          </div>
+        )}
+        {!isMobile && (
+          <div className="grid md:grid-cols-3 grid-cols-1 gap-6">
+            {related_details?.map(({ id, slug, title, source, image_cover }) => {
+              const map = {
+                article: 'artikel',
+                culinary: 'komoditas',
+                handcraft: 'kerajinan',
+                lodging: 'penginapan',
+                travel: 'wisata',
+              };
+
+              return (
+                <CardImage
+                  key={id}
+                  href={`/${map[source]}/${slug}@!@${id}`}
+                  text={title}
+                  alt={title}
+                  width={source === 'article' ? 1600 : 1200}
+                  height={900}
+                  layout="responsive"
+                  hover
+                  src={image_cover || '/'}
+                  className="h-full"
+                />
+              );
+            })}
+          </div>
+        )}
       </section>
     </>
   );
