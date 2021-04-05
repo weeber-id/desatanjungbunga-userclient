@@ -1,4 +1,5 @@
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
+import Head from 'next/head';
 import { useState } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import { useQuery } from 'react-query';
@@ -72,6 +73,13 @@ const PenginapanPage: React.FC<InferGetStaticPropsType<typeof getStaticProps>> =
 
   return (
     <>
+      <Head>
+        <title>Penginapan | Wisata Samosir</title>
+        <meta
+          name="description"
+          content="Mari memesan penginapan terbaik di kawasan wisata Pulau Samosir Desa Wisata Tanjung Bunga. Temukan penginapan dari harga termurah dan ternyaman."
+        />
+      </Head>
       <Header />
       <section className="container mx-auto px-10">
         <h2 className="text-center text-black font-medium text-h4 lg:text-h2 mt-24 md:mt-48 mb-7">

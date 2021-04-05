@@ -1,6 +1,7 @@
 import dayjs from 'dayjs';
 import { AnimatePresence } from 'framer-motion';
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next';
+import Head from 'next/head';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import numeral from 'numeral';
@@ -115,6 +116,19 @@ const KerajinanDetailPage: React.FC<InferGetStaticPropsType<typeof getStaticProp
 
   return (
     <>
+      <Head>
+        <title>Kerajinan | {name}</title>
+        <meta property="og:site_name" content="Wisata Samosir" />
+        <meta property="og:type" content="article" />
+        <meta property="og:title" content={name} />
+        <meta property="og:image" content={image} />
+        <meta name="description" content={short_description} />
+        <meta name="robots" content="index, follow" />
+        <meta
+          name="keywords"
+          content="Wisata Samosir, kerajinan khas sumatera utara, kerajinan di pulau samosir, kerajinan di danau toba, kerajinan khas desa tanjung bunga"
+        />
+      </Head>
       <AnimatePresence exitBeforeEnter>
         {openHour && (
           <OpenHour

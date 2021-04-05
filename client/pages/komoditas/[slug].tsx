@@ -20,6 +20,7 @@ import { useMemo, useState } from 'react';
 import { DayHashMap, defaultOperationTIme } from '../../helpers';
 import dayjs from 'dayjs';
 import { IconOpen } from '../../assets';
+import Head from 'next/head';
 
 interface StaticProps {
   initialData: ApiResponse<Commodity>;
@@ -119,6 +120,19 @@ const KomoditasDetailPage: React.FC<InferGetStaticPropsType<typeof getStaticProp
 
   return (
     <>
+      <Head>
+        <title>Komoditas | {name}</title>
+        <meta property="og:site_name" content="Wisata Samosir" />
+        <meta property="og:type" content="article" />
+        <meta property="og:title" content={name} />
+        <meta property="og:image" content={image} />
+        <meta name="robots" content="index, follow" />
+        <meta name="description" content={short_description} />
+        <meta
+          name="keywords"
+          content="Wisata Samosir, komoditas khas sumatera utara, buah khas sumatera utara, sayuran khas sumatera utara,  komoditas di pulau samosir, komoditas unggulan danau toba, komoditas unggulan desa tanjung bunga"
+        />
+      </Head>
       <AnimatePresence exitBeforeEnter>
         {openHour && (
           <OpenHour

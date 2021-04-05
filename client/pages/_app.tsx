@@ -22,8 +22,17 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
-        <title>Desa Tanjung Bunga</title>
+        <title>Wisata Samosir|Desa Tanjung Bunga</title>
         <link rel="icon" href="/favicon.ico" />
+        <meta name="robots" content="index, follow" />
+        <meta
+          name="description"
+          content="Temukan pengalaman wisata terbaik di Pulau Samosir dan Danau Toba melalui Desa Tanjung Bunga. Pesan secara online penginapan di Desa Tanjung Bunga yang dekat dengan danau Toba di Kab. Samosir. Pesan online Buah segar dan sayuran segar lokal Sumatera Utara. Pesan online kerajinan khas Samosir, Sumatera Utara. Ayo dapatkan pengalaman Adat khas Samosir di Desa Tanjung Bunga."
+        />
+        <meta
+          name="keywords"
+          content="Wisata Samosir, akomodasi wisata di pulau samosir, kerajinan khas sumatera utara, komoditas khas sumatera utara, kerajinan khas pulau samosir, booking penginapan di danau toba, desa tanjung bunga"
+        />
       </Head>
       <QueryClientProvider client={queryClient}>
         <Component {...pageProps} />

@@ -1,6 +1,8 @@
+import { data } from 'autoprefixer';
 import dayjs from 'dayjs';
 import { AnimatePresence } from 'framer-motion';
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next';
+import Head from 'next/head';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import numeral from 'numeral';
@@ -120,6 +122,19 @@ const PenginapanDetailPage: React.FC<InferGetStaticPropsType<typeof getStaticPro
 
   return (
     <>
+      <Head>
+        <title>Penginapan | {name}</title>
+        <meta property="og:site_name" content="Wisata Samosir" />
+        <meta property="og:type" content="article" />
+        <meta property="og:title" content={name} />
+        <meta property="og:image" content={image} />
+        <meta name="description" content={short_description} />
+        <meta name="robots" content="index, follow" />
+        <meta
+          name="keywords"
+          content="Wisata Samosir, akomodasi wisata di pulau samosir, penginapan di pulau samosir, booking penginapan di danau toba, penginapan di desa tanjung bunga"
+        />
+      </Head>
       <AnimatePresence exitBeforeEnter>
         {openHour && (
           <OpenHour
