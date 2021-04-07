@@ -31,7 +31,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
   const data: Lodgings = await res.json();
 
-  const { id, slug } = data.data.data[0];
+  const { id, slug } = !data.data?.data ? { id: '', slug: '' } : data.data.data[0];
 
   return {
     fallback: true,
@@ -52,10 +52,7 @@ export const getStaticProps: GetStaticProps<StaticProps> = async ({ params }) =>
 
   if (initialData.meta.code === 404) {
     return {
-      redirect: {
-        destination: '/404',
-        permanent: false,
-      },
+      notFound: true,
     };
   }
 

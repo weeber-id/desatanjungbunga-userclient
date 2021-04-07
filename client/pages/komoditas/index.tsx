@@ -8,7 +8,7 @@ import { CardImage, Filter, Footer, Header, Pagination, TextField } from '../../
 import { urlApi } from '../../helpers/urlApi';
 import { useMedia } from '../../hooks/useMedia';
 
-export type Commodities = ApiResponse<{ data: Commodity[]; max_page: number } | null>;
+export type Commodities = ApiResponse<{ data: Commodity[] | null; max_page: number } | null>;
 
 interface StaticProps {
   initialData: Commodities;
