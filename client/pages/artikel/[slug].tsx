@@ -87,7 +87,6 @@ const ArtikelDetailPage: React.FC<InferGetStaticPropsType<typeof getStaticProps>
         <meta name="image" content={image_cover} />
         <meta name="author" content={author} />
         <meta property="article:published_time" content={created_at} />
-        <meta name="description" content={body} />
         <meta name="robots" content="index, follow" />
       </Head>
       <Header />
