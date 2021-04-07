@@ -46,7 +46,13 @@ const Home: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = ({
   handcrafts,
   articles,
 }) => {
-  const [activeTravel, setActiveTravel] = useState<Travel>(travels.data.data[0]);
+  const [activeTravel, setActiveTravel] = useState<
+    Pick<Travel, 'id' | 'name' | 'slug' | 'image' | 'short_description'>
+  >(
+    !travels.data.data
+      ? { image: '/', name: '', id: '', short_description: '', slug: '' }
+      : travels.data.data[0]
+  );
 
   return (
     <>
@@ -210,7 +216,7 @@ const Home: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = ({
                 <div className="lg:hidden">
                   <div className="w-6"></div>
                 </div>
-                {commodities.data.data.map(({ id, slug, name, image }) => (
+                {commodities.data.data?.map(({ id, slug, name, image }) => (
                   <div key={id} className="scroll-snap-child-start mr-4">
                     <CardImage
                       src={image || '/'}
@@ -253,7 +259,7 @@ const Home: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = ({
             pilihan anda.
           </p>
           <div className="grid grid-cols-2 gap-3 lg:gap-6">
-            {handcrafts.data.data.map(({ id, slug, name, image }) => (
+            {handcrafts.data.data?.map(({ id, slug, name, image }) => (
               <CardImage
                 key={id}
                 src={image || '/'}
@@ -284,7 +290,7 @@ const Home: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = ({
           <div className="h-full lg:hidden scroll-snap-child-start">
             <div className="w-6 lg:w-0 h-4"></div>
           </div>
-          {articles.data.data.map(({ id, title, image_cover, slug }) => (
+          {articles.data.data?.map(({ id, title, image_cover, slug }) => (
             <CardImage
               key={id}
               src={image_cover}
