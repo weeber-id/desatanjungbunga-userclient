@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { Travel } from '../@types/types';
 import { Button, CardImage, Footer, Header } from '../components';
 import { urlApi } from '../helpers/urlApi';
@@ -54,6 +54,16 @@ const Home: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = ({
       : travels.data.data[0]
   );
 
+  const sectionJelajahiRef = useRef<HTMLElement>(null);
+
+  const handleScrollJelajahi = () => {
+    if (sectionJelajahiRef.current) {
+      sectionJelajahiRef.current.scrollIntoView({
+        behavior: 'smooth',
+      });
+    }
+  };
+
   return (
     <>
       <Head>
@@ -80,7 +90,7 @@ const Home: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = ({
               di Desa Tanjung Bunga
             </h2>
             <div className="flex items-center justify-center lg:justify-start mt-8">
-              <Button bold className="mr-6 h-12 w-36">
+              <Button onClick={handleScrollJelajahi} bold className="mr-6 h-12 w-36">
                 Jelajahi
               </Button>
               <Button href="/artikel" bold className="h-12 w-36" variant="outlined" color="red">
@@ -106,7 +116,7 @@ const Home: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = ({
           </div>
         </div>
       </section>
-      <section className="bg-blue-light py-16">
+      <section ref={sectionJelajahiRef} className="bg-blue-light py-16">
         <div className="container md:px-10 px-6 mx-auto items-center grid grid-cols-1 lg:grid-cols-2 gap-x-16 gap-y-3">
           <h3 className="md:text-h3 text-h5 lg:hidden text-center font-medium">
             Wisata di Desa Tanjung Bunga

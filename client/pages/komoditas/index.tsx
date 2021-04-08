@@ -74,7 +74,7 @@ const KomoditasPage: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = 
   return (
     <>
       <Head>
-        <title>Komoditas | Wisata Samosir</title>
+        <title>Produk & Kuliner | Wisata Samosir</title>
         <meta
           name="description"
           content="Beli buah, sayuran, dan hasil peternakan terbaik di Sumatera Utara. Temukan buah segar, sayuran sehat, dan daging segar di Kabupaten Samosir Desa Wisata Tanjung Bunga."
@@ -83,7 +83,7 @@ const KomoditasPage: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = 
       <Header />
       <section className="container mx-auto px-10">
         <h2 className="text-center text-black font-medium text-h4 lg:text-h2 mt-24 md:mt-48 mb-7">
-          Komoditas
+          Produk & Kuliner
         </h2>
       </section>
       <section className="container mx-auto mb-16 px-6 lg:px-10">

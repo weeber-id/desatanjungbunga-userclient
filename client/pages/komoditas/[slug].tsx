@@ -118,7 +118,7 @@ const KomoditasDetailPage: React.FC<InferGetStaticPropsType<typeof getStaticProp
   return (
     <>
       <Head>
-        <title>Komoditas | {name}</title>
+        <title>Produk & Kuliner | {name}</title>
         <meta property="og:site_name" content="Wisata Samosir" />
         <meta property="og:type" content="article" />
         <meta property="og:title" content={name} />
@@ -143,7 +143,7 @@ const KomoditasDetailPage: React.FC<InferGetStaticPropsType<typeof getStaticProp
       <section className="bg-blue-light mb-16 pt-20 md:pt-[9.5rem]">
         <div className="container mx-auto px-6 md:px-10 flex justify-end pb-4">
           <BreadCrumb>
-            <BreadCrumbItem href="/komoditas">Komoditas</BreadCrumbItem>
+            <BreadCrumbItem href="/komoditas">Produk & Kuliner</BreadCrumbItem>
             <BreadCrumbItem isActive>{name}</BreadCrumbItem>
           </BreadCrumb>
         </div>
