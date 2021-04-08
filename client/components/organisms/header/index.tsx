@@ -99,7 +99,7 @@ const Header = () => {
                   'text-purple': asPath !== '/komoditas',
                 })}
               >
-                Komoditas
+                Produk & Kuliner
               </a>
             </Link>
             <Link href="/kerajinan">
@@ -179,7 +179,7 @@ const Header = () => {
             <a
               className={classNames('hover:text-red mr-8', { 'text-red': asPath === '/komoditas' })}
             >
-              Komoditas
+              Produk & Kuliner
             </a>
           </Link>
           <Link href="/kerajinan">
