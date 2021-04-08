@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { IconClose, IconHamburger, IconSearch, IconTanjungBunga } from '../../../assets';
-import { TextField } from '../../atoms';
+// import { TextField } from '../../atoms';
 import { useRouter } from 'next/router';
 
 const Header = () => {
@@ -128,7 +128,7 @@ const Header = () => {
       <nav className="shadow-lg hidden md:block fixed top-0 left-0 w-full z-40 bg-white">
         <div
           className={classNames(
-            'flex transition-all duration-500 items-center justify-between px-10 container mx-auto',
+            'flex transition-all duration-500 items-center justify-center px-10 container mx-auto',
             {
               'h-0': isScroll,
               'h-20': !isScroll,
@@ -141,14 +141,14 @@ const Header = () => {
               'translate-y-0': !isScroll,
             })}
           />
-          <TextField
+          {/* <TextField
             className={classNames('transition-all duration-500 transform', {
               'z-0 -translate-y-10': isScroll,
               'translate-y-0': !isScroll,
             })}
             variant="search"
             placeholder="Ketik untuk mencari"
-          />
+          /> */}
         </div>
         <div className="flex items-center justify-center h-14 text-purple font-medium text-body relative z-10">
           <Link href="/">

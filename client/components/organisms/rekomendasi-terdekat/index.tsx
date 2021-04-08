@@ -49,7 +49,7 @@ const RekomendasiTerdekat: React.FC<Props> = ({ culinary_details, lodging_detail
         <div className="lg:hidden">
           <div className="w-6"></div>
         </div>
-        {active === 'penginapan' ? (
+        {active === 'kuliner' ? (
           <>
             {culinary_details?.map(({ id, name, image, slug }, i) => (
               <motion.div
