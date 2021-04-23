@@ -13,6 +13,7 @@ interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   href?: string;
   isExternal?: boolean;
   isLoading?: boolean;
+  openInNewTab?: boolean;
 }
 // eslint-disable-next-line
 const Button = forwardRef<any, ButtonProps>(
@@ -28,6 +29,7 @@ const Button = forwardRef<any, ButtonProps>(
       customHeight = false,
       isExternal,
       isLoading,
+      openInNewTab,
       ...otherProps
     },
     ref
@@ -51,8 +53,16 @@ const Button = forwardRef<any, ButtonProps>(
     );
 
     if (isExternal) {
+      let openInNewTabProps = {};
+
+      if (openInNewTab)
+        openInNewTabProps = {
+          target: '_blank',
+          rel: 'noreferrer noopener',
+        };
+
       return (
-        <a ref={ref} className={willBeUsedClassName} href={href}>
+        <a ref={ref} className={willBeUsedClassName} href={href} {...openInNewTabProps}>
           {children}
         </a>
       );

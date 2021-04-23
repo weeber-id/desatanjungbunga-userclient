@@ -40,16 +40,16 @@ const ContactPage = () => {
               Kontak
             </h3>
             <h3 className="text-black lg:text-h3 md:text-h4 text-h5 font-medium">
-              0626 - 01020304
+              +62 813 9676 2046
             </h3>
             <p className="md:text-body text-body-sm text-purple mb-5">
               Hubungan Masyarakat (Humas)
             </p>
             <h3 className="text-black lg:text-h3 md:text-h4 text-h5 font-medium">
-              0626 - 20025004
+              +62 813 9676 2046
             </h3>
             <p className="md:text-body text-body-sm text-purple">
-              Kantor Sekretariatan Desa Tanjung Bunga, Kec. Pangururan, Kab. Samosir.
+              Pokdarwis Desa Tanjung Bunga, Kec. Pangururan, Kab. Samosir.
             </p>
           </div>
         </div>
@@ -59,7 +59,9 @@ const ContactPage = () => {
           </div>
           <div className="flex flex-col items-center">
             <h3 className="text-purple lg:text-h3 md:text-h4 text-h5 font-medium mb-3">Whatsapp</h3>
-            <Button className="mb-5">0626 - 01020304</Button>
+            <Button openInNewTab isExternal href="https://wa.me/+6281396762046" className="mb-5">
+              +62 813 9676 2046
+            </Button>
             <p className="md:text-body text-body-sm text-center text-purple">
               Hubungan Masyarakat (Humas)
             </p>

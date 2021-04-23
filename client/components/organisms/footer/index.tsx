@@ -19,7 +19,7 @@ const Footer = () => {
             Hubungi Kami
           </h3>
           <h3 className="md:text-h3 text-h5 text-purple-light font-medium mb-2.5">
-            0626 - 01020304
+            +62 813 9676 2046
           </h3>
           <Button href="/contact" variant="outlined" color="red">
             Lihat Lengkap
